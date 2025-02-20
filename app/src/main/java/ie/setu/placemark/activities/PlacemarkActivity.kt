@@ -5,14 +5,18 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.snackbar.Snackbar
 import ie.setu.placemark.R
 import ie.setu.placemark.databinding.ActivityPlacemarkBinding
+import ie.setu.placemark.models.PlacemarkModel
 import timber.log.Timber
 import timber.log.Timber.i
 
 class PlacemarkActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlacemarkBinding
+    var placemark = PlacemarkModel()
+    val placemarks = ArrayList<PlacemarkModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +36,21 @@ class PlacemarkActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnAdd.setOnClickListener() {
-            i("add Button Pressed")
+            placemark.title = binding.placemarkTitle.text.toString()
+            placemark.description = binding.placemarkDescription.text.toString()
+            if (placemark.title.isNotEmpty()) {
+                placemarks.add(placemark.copy())
+                i("add Button Pressed: ${placemark}")
+                for (i in placemarks.indices) {
+                    i("Placemark[$i]:${this.placemarks[i]}")
+                }
+            }
+            else {
+                Snackbar
+                    .make(it,"Please Enter a title", Snackbar.LENGTH_LONG)
+                    .show()
+            }
         }
     }
 }
+

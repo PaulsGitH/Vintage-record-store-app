@@ -3,5 +3,7 @@
     <string name="hint_placemarkTitle">Placemark Title</string>
     <string name="button_addPlacemark">Add Placemark</string>
     <string name="placemark_activity_started">Placemark Activity started...</string>
+    <string name="hint_placemarkDescription">Description </string>
+
 
 </resources>

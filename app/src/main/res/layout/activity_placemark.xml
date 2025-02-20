@@ -50,6 +50,18 @@
                     android:maxLines="1"
                     android:padding="8dp" />
 
+                <EditText
+                    android:id="@+id/placemarkDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_margin="8dp"
+                    android:autofillHints="hint"
+                    android:hint="@string/hint_placemarkDescription"
+                    android:inputType="text"
+                    android:maxLength="50"
+                    android:maxLines="1"
+                    android:padding="8dp" />
+
                 <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
