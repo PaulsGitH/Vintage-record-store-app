@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "ie.setu.project"
+    namespace = "ie.setu.placemark"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "ie.setu.project"
+        applicationId = "ie.setu.placemark"
         minSdk = 30
         targetSdk = 35
         versionCode = 1
@@ -33,6 +33,11 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
 }
 
 dependencies {
@@ -42,10 +47,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation (libs.timberkt)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation (libs.timberkt)
-
-
 }
