@@ -4,6 +4,8 @@
     <string name="button_addPlacemark">Add Placemark</string>
     <string name="placemark_activity_started">Placemark Activity started...</string>
     <string name="hint_placemarkDescription">Description </string>
+    <string name="menu_addPlacemark">Add</string>
+
 
 
 </resources>
