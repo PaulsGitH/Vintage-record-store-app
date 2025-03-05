@@ -31,7 +31,8 @@ class PlacemarkListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = PlacemarkAdapter(app.placemarks)
+        //binding.recyclerView.adapter = PlacemarkAdapter(app.placemarks)
+        binding.recyclerView.adapter = PlacemarkAdapter(app.placemarks.findAll())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -54,7 +55,7 @@ class PlacemarkListActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
-                (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.placemarks.size)
+                (binding.recyclerView.adapter)?.notifyItemRangeChanged(0,app.placemarks.findAll().size)
             }
             if (it.resultCode == Activity.RESULT_CANCELED) {
                 Snackbar.make(binding.root, "Placemark Add Cancelled", Snackbar.LENGTH_LONG).show()
