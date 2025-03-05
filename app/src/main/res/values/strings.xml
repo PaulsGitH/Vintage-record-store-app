@@ -5,6 +5,7 @@
     <string name="placemark_activity_started">Placemark Activity started...</string>
     <string name="hint_placemarkDescription">Description </string>
     <string name="menu_addPlacemark">Add</string>
+    <string name="menu_cancelPlacemark">Cancel</string>
 
 
 
