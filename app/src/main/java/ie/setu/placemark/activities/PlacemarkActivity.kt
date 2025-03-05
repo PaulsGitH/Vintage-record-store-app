@@ -23,17 +23,22 @@ class PlacemarkActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_placemark)
-
-        Timber.plant(Timber.DebugTree())
-        i(getString(R.string.placemark_activity_started))
 
         binding = ActivityPlacemarkBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         binding.topAppBar.title = title
         setSupportActionBar(binding.topAppBar)
 
         app = application as MainApp
+        i(getString(R.string.placemark_activity_started))
+
+        if (intent.hasExtra("placemark_edit")) {
+            placemark = intent.extras?.getParcelable("placemark_edit")!!
+            binding.placemarkTitle.setText(placemark.title)
+            binding.placemarkDescription.setText(placemark.description)
+        }
+
         binding.btnAdd.setOnClickListener() {
             placemark.title = binding.placemarkTitle.text.toString()
             placemark.description = binding.placemarkDescription.text.toString()
