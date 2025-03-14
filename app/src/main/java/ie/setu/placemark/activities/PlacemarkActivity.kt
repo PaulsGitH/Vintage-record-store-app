@@ -1,15 +1,19 @@
 package ie.setu.placemark.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.snackbar.Snackbar
 import ie.setu.placemark.R
 import ie.setu.placemark.databinding.ActivityPlacemarkBinding
+import ie.setu.placemark.helpers.showImagePicker
 import ie.setu.placemark.main.MainApp
 import ie.setu.placemark.models.PlacemarkModel
 import timber.log.Timber
@@ -18,6 +22,7 @@ import timber.log.Timber.i
 class PlacemarkActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlacemarkBinding
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     var placemark = PlacemarkModel()
     lateinit var app : MainApp
 
@@ -63,8 +68,9 @@ class PlacemarkActivity : AppCompatActivity() {
         }
 
         binding.chooseImage.setOnClickListener {
-            i("Select image")
+            showImagePicker(imageIntentLauncher)
         }
+        registerImagePickerCallback()
 
     }
 
@@ -81,6 +87,21 @@ class PlacemarkActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when(result.resultCode){
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Result ${result.data!!.data}")
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
     }
 
 }
