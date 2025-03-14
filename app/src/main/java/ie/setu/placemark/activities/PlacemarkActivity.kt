@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import ie.setu.placemark.R
 import ie.setu.placemark.databinding.ActivityPlacemarkBinding
 import ie.setu.placemark.helpers.showImagePicker
@@ -97,6 +98,10 @@ class PlacemarkActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
+                            placemark.image = result.data!!.data!!
+                            Picasso.get()
+                                .load(placemark.image)
+                                .into(binding.placemarkImage)
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }
