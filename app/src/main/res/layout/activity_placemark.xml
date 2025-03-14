@@ -66,6 +66,22 @@
                     android:padding="8dp" />
 
                 <Button
+                    android:id="@+id/chooseImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:backgroundTint="?attr/colorSecondary"
+                    android:text="@string/button_addImage"/>
+
+                <ImageView
+                    android:id="@+id/placemarkImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher"/>
+
+                <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -61,6 +61,11 @@ class PlacemarkActivity : AppCompatActivity() {
                     .show()
             }
         }
+
+        binding.chooseImage.setOnClickListener {
+            i("Select image")
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -79,9 +84,3 @@ class PlacemarkActivity : AppCompatActivity() {
     }
 
 }
-
-When you run the application - see if you can update a placemarks contents. The expected functionality should now be evident.
-
-Tutors v:12.0.1
-
-An Open Learning Web Toolkit: Light and dark mode + themes available on the Layout menu
