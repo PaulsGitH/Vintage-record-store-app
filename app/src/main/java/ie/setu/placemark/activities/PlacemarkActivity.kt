@@ -33,7 +33,11 @@ class PlacemarkActivity : AppCompatActivity() {
         app = application as MainApp
         i(getString(R.string.placemark_activity_started))
 
+        var edit = false //tracks if we arrived here via an existing placemark
+
         if (intent.hasExtra("placemark_edit")) {
+            edit = true
+            binding.btnAdd.setText(R.string.save_placemark)
             placemark = intent.extras?.getParcelable("placemark_edit")!!
             binding.placemarkTitle.setText(placemark.title)
             binding.placemarkDescription.setText(placemark.description)
@@ -43,12 +47,17 @@ class PlacemarkActivity : AppCompatActivity() {
             placemark.title = binding.placemarkTitle.text.toString()
             placemark.description = binding.placemarkDescription.text.toString()
             if (placemark.title.isNotEmpty()) {
-                app.placemarks.create(placemark.copy())
+                if (edit) {
+                    app.placemarks.update(placemark.copy())
+                }
+                else {
+                    app.placemarks.create(placemark.copy())
+                }
                 setResult(RESULT_OK)
                 finish()
             }
             else {
-                Snackbar.make(it,"Please Enter a title", Snackbar.LENGTH_LONG)
+                Snackbar.make(it, getString(R.string.enter_placemark_title), Snackbar.LENGTH_LONG)
                     .show()
             }
         }
@@ -70,3 +79,9 @@ class PlacemarkActivity : AppCompatActivity() {
     }
 
 }
+
+When you run the application - see if you can update a placemarks contents. The expected functionality should now be evident.
+
+Tutors v:12.0.1
+
+An Open Learning Web Toolkit: Light and dark mode + themes available on the Layout menu
