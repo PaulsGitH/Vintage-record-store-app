@@ -107,6 +107,13 @@ class PlacemarkActivity : AppCompatActivity() {
                     RESULT_CANCELED -> { } else -> { }
                 }
             }
+
+        if (intent.hasExtra("placemark_edit")) {
+            Picasso.get()
+                .load(placemark.image)
+                .into(binding.placemarkImage)
+        }
+
     }
 
 }
