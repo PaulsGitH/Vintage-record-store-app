@@ -57,6 +57,7 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
             if (it.resultCode == Activity.RESULT_OK) {
                 (binding.recyclerView.adapter)?.
                 notifyItemRangeChanged(0,app.placemarks.findAll().size)
+                binding.recyclerView.adapter?.notifyDataSetChanged() // necessary to refresh menu after deletion of item
             }
             if (it.resultCode == Activity.RESULT_CANCELED) {
                 Snackbar.make(binding.root, "Placemark Add Cancelled", Snackbar.LENGTH_LONG).show()
