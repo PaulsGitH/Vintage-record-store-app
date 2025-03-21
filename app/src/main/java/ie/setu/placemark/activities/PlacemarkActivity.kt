@@ -86,6 +86,11 @@ class PlacemarkActivity : AppCompatActivity() {
                 setResult(RESULT_CANCELED)
                 finish()
             }
+            R.id.item_delete -> {
+                app.placemarks.delete(placemark)
+                setResult(RESULT_OK)
+                finish()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
