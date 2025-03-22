@@ -1,6 +1,8 @@
 package ie.setu.Album.activities
 
+import android.app.DatePickerDialog
 import android.content.Intent
+import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
@@ -81,7 +83,19 @@ class AlbumActivity : AppCompatActivity() {
         }
         registerImagePickerCallback()
 
+        binding.AlbumYear.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+
+            val datePicker = DatePickerDialog(this, { _, selectedYear, _, _ ->
+                binding.AlbumYear.setText(selectedYear.toString())
+            }, year, 0, 1)
+
+            datePicker.show()
+        }
+
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_album, menu)
