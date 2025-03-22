@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.PlacemarkActivity">
+    tools:context=".activities.AlbumActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -42,24 +42,24 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/placemarkTitle"
+                    android:id="@+id/AlbumTitle"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:autofillHints="hint"
-                    android:hint="@string/hint_placemarkTitle"
+                    android:hint="@string/hint_AlbumTitle"
                     android:inputType="text"
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp" />
 
                 <EditText
-                    android:id="@+id/placemarkDescription"
+                    android:id="@+id/AlbumDescription"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:autofillHints="hint"
-                    android:hint="@string/hint_placemarkDescription"
+                    android:hint="@string/hint_AlbumDescription"
                     android:inputType="text"
                     android:maxLength="50"
                     android:maxLines="1"
@@ -76,7 +76,7 @@
                     android:text="@string/button_addImage"/>
 
                 <ImageView
-                    android:id="@+id/placemarkImage"
+                    android:id="@+id/AlbumImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:srcCompat="@mipmap/ic_launcher"/>
@@ -89,7 +89,7 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:backgroundTint="?attr/colorSecondary"
-                    android:text="@string/button_addPlacemark" />
+                    android:text="@string/button_addAlbum" />
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>
