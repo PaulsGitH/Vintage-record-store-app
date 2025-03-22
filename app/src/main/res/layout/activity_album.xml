@@ -56,14 +56,34 @@
                 <EditText
                     android:id="@+id/AlbumDescription"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:autofillHints="hint"
                     android:hint="@string/hint_AlbumDescription"
-                    android:inputType="text"
-                    android:maxLength="50"
+                    android:inputType="textMultiLine"
+                    android:maxLength="750"
+                    android:maxLines="5"
+                    android:padding="8dp"
+                    android:scrollbars="vertical" />
+
+                <EditText
+                    android:id="@+id/AlbumYear"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_margin="8dp"
+                    android:hint="@string/hint_Album_year"
+                    android:inputType="none"
+                    android:maxLength="4"
                     android:maxLines="1"
+                    android:focusable="false"
                     android:padding="8dp" />
+
+                <Spinner
+                    android:id="@+id/AlbumGenre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"/>
+
 
                 <Button
                     android:id="@+id/chooseImage"
@@ -79,16 +99,16 @@
                     android:id="@+id/AlbumImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher"/>
+                    app:srcCompat="@mipmap/ic_launcher" />
 
                 <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
+                    android:backgroundTint="?attr/colorSecondary"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
-                    android:backgroundTint="?attr/colorSecondary"
                     android:text="@string/button_addAlbum" />
             </LinearLayout>
         </ScrollView>
