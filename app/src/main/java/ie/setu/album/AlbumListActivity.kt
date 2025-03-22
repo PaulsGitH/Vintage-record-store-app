@@ -1,4 +1,4 @@
-package ie.setu.placemark.activities
+package ie.setu.Album.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -9,21 +9,21 @@ import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import ie.setu.placemark.R
-import ie.setu.placemark.adapters.PlacemarkAdapter
-import ie.setu.placemark.adapters.PlacemarkListener
-import ie.setu.placemark.databinding.ActivityPlacemarkListBinding
-import ie.setu.placemark.main.MainApp
-import ie.setu.placemark.models.PlacemarkModel
+import ie.setu.Album.R
+import ie.setu.Album.adapters.AlbumAdapter
+import ie.setu.Album.adapters.AlbumListener
+import ie.setu.Album.databinding.ActivityAlbumListBinding
+import ie.setu.Album.main.MainApp
+import ie.setu.Album.models.AlbumModel
 
-class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
+class AlbumListActivity : AppCompatActivity(), AlbumListener {
 
     lateinit var app: MainApp
-    private lateinit var binding: ActivityPlacemarkListBinding
+    private lateinit var binding: ActivityAlbumListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPlacemarkListBinding.inflate(layoutInflater)
+        binding = ActivityAlbumListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.topAppBar.title = title
         setSupportActionBar(binding.topAppBar)
@@ -32,7 +32,7 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = PlacemarkAdapter(app.placemarks.findAll(), this)
+        binding.recyclerView.adapter = AlbumAdapter(app.Albums.findAll(), this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -43,7 +43,7 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_add -> {
-                val launcherIntent = Intent(this, PlacemarkActivity::class.java)
+                val launcherIntent = Intent(this, AlbumActivity::class.java)
                 getResult.launch(launcherIntent)
             }
         }
@@ -56,17 +56,17 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
                 (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.placemarks.findAll().size)
+                notifyItemRangeChanged(0,app.Albums.findAll().size)
                 binding.recyclerView.adapter?.notifyDataSetChanged() // necessary to refresh menu after deletion of item
             }
             if (it.resultCode == Activity.RESULT_CANCELED) {
-                Snackbar.make(binding.root, "Placemark Add Cancelled", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, "Album Add Cancelled", Snackbar.LENGTH_LONG).show()
             }
         }
 
-    override fun onPlacemarkClick(placemark: PlacemarkModel) {
-        val launcherIntent = Intent(this, PlacemarkActivity::class.java)
-        launcherIntent.putExtra("placemark_edit", placemark)
+    override fun onAlbumClick(Album: AlbumModel) {
+        val launcherIntent = Intent(this, AlbumActivity::class.java)
+        launcherIntent.putExtra("Album_edit", Album)
         getResult.launch(launcherIntent)
     }
 }

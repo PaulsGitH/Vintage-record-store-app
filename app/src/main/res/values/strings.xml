@@ -1,19 +1,20 @@
 <resources>
-    <string name="app_name">project</string>
-    <string name="hint_placemarkTitle">Placemark Title</string>
-    <string name="button_addPlacemark">Add Placemark</string>
-    <string name="placemark_activity_started">Placemark Activity started...</string>
-    <string name="hint_placemarkDescription">Description </string>
-    <string name="menu_addPlacemark">Add</string>
-    <string name="menu_cancelPlacemark">Cancel</string>
+    <string name="app_name">Vintage Record Store</string>
+    <string name="hint_AlbumTitle">Album Title</string>
+    <string name="button_addAlbum">Add Album</string>
+    <string name="Album_activity_started">Album Activity started...</string>
+    <string name="hint_AlbumDescription">Description </string>
+    <string name="menu_addAlbum">Add</string>
+    <string name="menu_cancelAlbum">Cancel</string>
     <string name="menu_delete">Delete</string>
-    <string name="enter_placemark_title">Please Enter a Placemark Title</string>
-    <string name="save_placemark"> Save Placemark </string>
-    <string name="button_addImage">Add Image</string>
-    <string name="select_placemark_image">Select placemark image</string>
-    <string name="enter_placemark_description">Please enter a Description</string>
-    <string name="placemark_description_too_long">Description must be under 750 characters</string>
-    <string name="enter_placemark_image">Please Select an Image for the Placemark</string>
-    <string name="placemark_duplicate_title">A placemark with this title already exists</string>
+    <string name="enter_Album_title">Please Enter a Album Title</string>
+    <string name="save_Album"> Save Album </string>
+    <string name="button_addImage">Add Album cover</string>
+    <string name="select_Album_image">Select Album image</string>
+    <string name="enter_Album_description">Please enter a Description</string>
+    <string name="Album_description_too_long">Description must be under 750 characters</string>
+    <string name="enter_Album_image">Please Select an Image for the Album</string>
+    <string name="Album_duplicate_title">A Album with this title already exists</string>
+    <string name="change_Album_image">Change Album cover</string>
 
 </resources>

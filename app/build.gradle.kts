@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "ie.setu.placemark"
+    namespace = "ie.setu.Album"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "ie.setu.placemark"
+        applicationId = "ie.setu.Album"
         minSdk = 30
         targetSdk = 35
         versionCode = 1
