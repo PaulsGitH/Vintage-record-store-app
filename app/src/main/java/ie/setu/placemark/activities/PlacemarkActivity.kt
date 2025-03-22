@@ -49,24 +49,31 @@ class PlacemarkActivity : AppCompatActivity() {
             binding.placemarkDescription.setText(placemark.description)
         }
 
-        binding.btnAdd.setOnClickListener() {
+        binding.btnAdd.setOnClickListener {
             placemark.title = binding.placemarkTitle.text.toString()
             placemark.description = binding.placemarkDescription.text.toString()
+
             if (placemark.title.isNotEmpty()) {
-                if (edit) {
-                    app.placemarks.update(placemark.copy())
+                if (placemark.description.isNotEmpty()) {
+                    if (placemark.description.length <= 750) {
+                        if (edit) {
+                            app.placemarks.update(placemark.copy())
+                        } else {
+                            app.placemarks.create(placemark.copy())
+                        }
+                        setResult(RESULT_OK)
+                        finish()
+                    } else {
+                        Snackbar.make(it, getString(R.string.placemark_description_too_long), Snackbar.LENGTH_LONG).show()
+                    }
+                } else {
+                    Snackbar.make(it, getString(R.string.enter_placemark_description), Snackbar.LENGTH_LONG).show()
                 }
-                else {
-                    app.placemarks.create(placemark.copy())
-                }
-                setResult(RESULT_OK)
-                finish()
-            }
-            else {
-                Snackbar.make(it, getString(R.string.enter_placemark_title), Snackbar.LENGTH_LONG)
-                    .show()
+            } else {
+                Snackbar.make(it, getString(R.string.enter_placemark_title), Snackbar.LENGTH_LONG).show()
             }
         }
+
 
         binding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
