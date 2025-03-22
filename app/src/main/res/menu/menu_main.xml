@@ -7,4 +7,12 @@
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/menu_addAlbum"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/item_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/menu_search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always" />
+
 </menu>

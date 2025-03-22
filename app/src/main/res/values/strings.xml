@@ -16,5 +16,6 @@
     <string name="enter_Album_image">Please Select an Image for the Album</string>
     <string name="Album_duplicate_title">A Album with this title already exists</string>
     <string name="change_Album_image">Change Album cover</string>
+    <string name="menu_search">Search Albums</string>
 
 </resources>
