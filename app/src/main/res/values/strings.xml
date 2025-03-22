@@ -18,7 +18,8 @@
     <string name="change_Album_image">Change Album cover</string>
     <string name="menu_search">Search Albums</string>
     <string name="hint_Album_year">Select Release Year</string>
-    <string-array name="album_genres">
+    <string-array name="Album_genres">
+        <item>Select Genre</item>
         <item>Rock</item>
         <item>Jazz</item>
         <item>Blues</item>
@@ -27,6 +28,5 @@
         <item>Hip-Hop</item>
         <item>Country</item>
     </string-array>
-
 
 </resources>
