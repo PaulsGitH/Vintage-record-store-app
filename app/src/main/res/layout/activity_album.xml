@@ -77,6 +77,12 @@
                     android:focusable="false"
                     android:padding="8dp" />
 
+                <Spinner
+                    android:id="@+id/AlbumGenre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"/>
+
                 <Button
                     android:id="@+id/chooseImage"
                     android:layout_width="match_parent"
