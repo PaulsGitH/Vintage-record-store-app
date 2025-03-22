@@ -14,5 +14,6 @@
     <string name="enter_placemark_description">Please enter a Description</string>
     <string name="placemark_description_too_long">Description must be under 750 characters</string>
     <string name="enter_placemark_image">Please Select an Image for the Placemark</string>
+    <string name="placemark_duplicate_title">A placemark with this title already exists</string>
 
 </resources>
