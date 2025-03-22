@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.widget.SearchView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -37,6 +38,21 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+
+        val searchItem = menu.findItem(R.id.item_search)
+        val searchView = searchItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterAlbums(newText.orEmpty())
+                return true
+            }
+        })
+
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -69,4 +85,15 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
         launcherIntent.putExtra("Album_edit", Album)
         getResult.launch(launcherIntent)
     }
+
+    private fun filterAlbums(query: String) {
+        val filteredList = app.Albums.findAll().filter {
+            it.title.contains(query, ignoreCase = true)
+        }
+
+        (binding.recyclerView.adapter as AlbumAdapter).updateList(filteredList)
+    }
+
+
+
 }

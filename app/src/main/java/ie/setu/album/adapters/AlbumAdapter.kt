@@ -11,6 +11,11 @@ class AlbumAdapter constructor(private var Albums: List<AlbumModel>,
                                    private val listener: AlbumListener) :
     RecyclerView.Adapter<AlbumAdapter.MainHolder>() {
 
+    fun updateList(newList: List<AlbumModel>) {
+        Albums = newList
+        notifyDataSetChanged() //allows refresh to display all albums as added
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = CardAlbumBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
