@@ -65,6 +65,18 @@
                     android:maxLines="1"
                     android:padding="8dp" />
 
+                <EditText
+                    android:id="@+id/AlbumYear"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_margin="8dp"
+                    android:hint="@string/hint_Album_year"
+                    android:inputType="none"
+                    android:maxLength="4"
+                    android:maxLines="1"
+                    android:focusable="false"
+                    android:padding="8dp" />
+
                 <Button
                     android:id="@+id/chooseImage"
                     android:layout_width="match_parent"

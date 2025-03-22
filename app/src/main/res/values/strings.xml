@@ -17,5 +17,6 @@
     <string name="Album_duplicate_title">A Album with this title already exists</string>
     <string name="change_Album_image">Change Album cover</string>
     <string name="menu_search">Search Albums</string>
+    <string name="hint_Album_year">Select Release Year</string>
 
 </resources>
