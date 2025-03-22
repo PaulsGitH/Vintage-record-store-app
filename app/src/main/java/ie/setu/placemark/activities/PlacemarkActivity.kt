@@ -1,6 +1,7 @@
 package ie.setu.placemark.activities
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -53,24 +54,24 @@ class PlacemarkActivity : AppCompatActivity() {
             placemark.title = binding.placemarkTitle.text.toString()
             placemark.description = binding.placemarkDescription.text.toString()
 
-            if (placemark.title.isNotEmpty()) {
-                if (placemark.description.isNotEmpty()) {
-                    if (placemark.description.length <= 750) {
-                        if (edit) {
-                            app.placemarks.update(placemark.copy())
-                        } else {
-                            app.placemarks.create(placemark.copy())
-                        }
-                        setResult(RESULT_OK)
-                        finish()
-                    } else {
-                        Snackbar.make(it, getString(R.string.placemark_description_too_long), Snackbar.LENGTH_LONG).show()
-                    }
+            if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty() &&
+                placemark.description.length <= 750 && placemark.image != Uri.EMPTY) {
+
+                if (edit) {
+                    app.placemarks.update(placemark.copy())
                 } else {
-                    Snackbar.make(it, getString(R.string.enter_placemark_description), Snackbar.LENGTH_LONG).show()
+                    app.placemarks.create(placemark.copy())
                 }
+                setResult(RESULT_OK)
+                finish()
+
             } else {
-                Snackbar.make(it, getString(R.string.enter_placemark_title), Snackbar.LENGTH_LONG).show()
+                when {
+                    placemark.title.isEmpty() -> Snackbar.make(it, getString(R.string.enter_placemark_title), Snackbar.LENGTH_LONG).show()
+                    placemark.description.isEmpty() -> Snackbar.make(it, getString(R.string.enter_placemark_description), Snackbar.LENGTH_LONG).show()
+                    placemark.description.length > 750 -> Snackbar.make(it, getString(R.string.placemark_description_too_long), Snackbar.LENGTH_LONG).show()
+                    placemark.image == Uri.EMPTY -> Snackbar.make(it, getString(R.string.enter_placemark_image), Snackbar.LENGTH_LONG).show()
+                }
             }
         }
 
