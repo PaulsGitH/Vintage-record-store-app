@@ -56,14 +56,15 @@
                 <EditText
                     android:id="@+id/AlbumDescription"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:autofillHints="hint"
                     android:hint="@string/hint_AlbumDescription"
-                    android:inputType="text"
-                    android:maxLength="50"
-                    android:maxLines="1"
-                    android:padding="8dp" />
+                    android:inputType="textMultiLine"
+                    android:maxLength="750"
+                    android:maxLines="5"
+                    android:padding="8dp"
+                    android:scrollbars="vertical" />
 
                 <EditText
                     android:id="@+id/AlbumYear"
