@@ -35,6 +35,24 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = AlbumAdapter(app.albums.findAll(), this)
+
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    val intent = Intent(this, HomeActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) // Ensures proper navigation
+                    startActivity(intent)
+                    true
+                }
+                R.id.nav_albums -> true
+                R.id.nav_favorites -> {
+                    startActivity(Intent(this, FavouritesActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
