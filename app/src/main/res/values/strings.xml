@@ -1,24 +1,29 @@
 <resources>
     <string name="app_name">Vintage Record Store</string>
-    <string name="hint_AlbumTitle">Album Title</string>
+    <string name="hint_albumName">Please enter Album Name</string>
+    <string name="hint_albumGenre">Please Select Genre</string>
+    <string name="hint_albumReleaseDate">Please Select Release Date</string>
+    <string name="hint_albumArtist">Please enter Artist Name</string>
+    <string name="hint_albumDescription">Please enter Album Description</string>
+    <string name="hint_albumCost">Please enter Album Cost (€)</string>
+    <string name="hint_album_year"> Please Select Release Year</string>
     <string name="button_addAlbum">Add Album</string>
-    <string name="Album_activity_started">Album Activity started...</string>
-    <string name="hint_AlbumDescription">Description </string>
+    <string name="button_addImage">Add Album Cover</string>
+    <string name="change_album_image">Change Album Cover</string>
+    <string name="enter_album_title">Please enter an Album Title</string>
+    <string name="enter_album_description">Please enter an Album Description</string>
+    <string name="album_description_too_long">Description must be under 750 characters</string>
+    <string name="enter_album_image">Please Select an Image for the Album</string>
+    <string name="album_duplicate_title">This Album already exists</string>
     <string name="menu_addAlbum">Add</string>
     <string name="menu_cancelAlbum">Cancel</string>
     <string name="menu_delete">Delete</string>
-    <string name="enter_Album_title">Please Enter a Album Title</string>
-    <string name="save_Album"> Save Album </string>
-    <string name="button_addImage">Add Album cover</string>
-    <string name="select_Album_image">Select Album image</string>
-    <string name="enter_Album_description">Please enter a Description</string>
-    <string name="Album_description_too_long">Description must be under 750 characters</string>
-    <string name="enter_Album_image">Please Select an Image for the Album</string>
-    <string name="Album_duplicate_title">A Album with this title already exists</string>
-    <string name="change_Album_image">Change Album cover</string>
     <string name="menu_search">Search Albums</string>
-    <string name="hint_Album_year">Select Release Year</string>
-    <string-array name="Album_genres">
+    <string name="select_album_image">Select Album Image</string>
+    <string name="album_activity_started">Album Activity started...</string>
+    <string name="album_rating">Album Rating</string>
+    <string name="save_album">Save Album</string>
+    <string-array name="album_genres">
         <item>Select Genre</item>
         <item>Rock</item>
         <item>Jazz</item>
@@ -29,4 +34,8 @@
         <item>Country</item>
     </string-array>
 
+    <string name="nav_home">Home</string>
+    <string name="nav_albums">Albums</string>
+    <string name="nav_favorites">Favorites</string>
+    <string name="menu_favorites">Favorites</string>
 </resources>

@@ -18,14 +18,17 @@ import ie.setu.Album.databinding.ActivityAlbumBinding
 import ie.setu.Album.helpers.showImagePicker
 import ie.setu.Album.main.MainApp
 import ie.setu.Album.models.AlbumModel
+import ie.setu.album.activities.AlbumListActivity
+import ie.setu.album.activities.HomeActivity
+import ie.setu.album.activities.FavoritesActivity
 import timber.log.Timber.i
 
 class AlbumActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAlbumBinding
-    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
-    var Album = AlbumModel()
-    lateinit var app : MainApp
+    private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
+    var album = AlbumModel()
+    lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,71 +40,103 @@ class AlbumActivity : AppCompatActivity() {
         setSupportActionBar(binding.topAppBar)
 
         app = application as MainApp
-        i(getString(R.string.Album_activity_started))
+        i(getString(R.string.album_activity_started))
 
-        val genres = resources.getStringArray(R.array.Album_genres)
+        val genres = resources.getStringArray(R.array.album_genres)
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, genres)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.AlbumGenre.adapter = adapter
+        binding.albumGenre.adapter = adapter
 
-        var edit = false //tracks if we arrived here via an existing Album
+        var edit = false // Tracks if an album is being edited
 
-        if (intent.hasExtra("Album_edit")) {
+        if (intent.hasExtra("album_edit")) {
             edit = true
-            binding.btnAdd.setText(R.string.save_Album)
-            Album = intent.extras?.getParcelable("Album_edit")!!
-            binding.AlbumTitle.setText(Album.title)
-            binding.AlbumDescription.setText(Album.description)
+            binding.btnAdd.setText(R.string.save_album)
+            album = intent.extras?.getParcelable("album_edit")!!
+            binding.albumName.setText(album.albumName)
+            binding.albumDescription.setText(album.albumDescription)
+            binding.albumArtist.setText(album.artist)
+            binding.albumCost.setText(album.cost.toString())
+            binding.albumReleaseDate.setText(album.albumReleaseDate)
+            binding.albumGenre.setSelection(genres.indexOf(album.albumGenre))
+            binding.albumRating.rating = album.rating.toFloat()
         }
 
         binding.btnAdd.setOnClickListener {
-            Album.title = binding.AlbumTitle.text.toString()
-            Album.description = binding.AlbumDescription.text.toString()
+            album.albumName = binding.albumName.text.toString()
+            album.albumDescription = binding.albumDescription.text.toString()
+            album.artist = binding.albumArtist.text.toString()
+            album.albumReleaseDate = binding.albumReleaseDate.text.toString()
+            album.albumGenre = binding.albumGenre.selectedItem.toString()
+            album.cost = binding.albumCost.text.toString().toDoubleOrNull() ?: 0.0
+            album.rating = binding.albumRating.rating.toInt()
 
-            val existingAlbum = app.Albums.findAll().find { it.title == Album.title }
+            val existingAlbum = app.albums.findAll().find { it.albumName == album.albumName }
 
-            if (Album.title.isNotEmpty() && Album.description.isNotEmpty() &&
-                Album.description.length <= 750 && Album.image != Uri.EMPTY &&
-                (edit || existingAlbum == null)) {
+            if (album.albumName.isNotEmpty() && album.artist.isNotEmpty() &&
+                album.albumDescription.isNotEmpty() && album.albumDescription.length <= 750 &&
+                album.albumGenre != "Select Genre" && album.albumReleaseDate.isNotEmpty() &&
+                album.cost > 0 && album.albumImage != Uri.EMPTY && (edit || existingAlbum == null)) {
 
                 if (edit) {
-                    app.Albums.update(Album.copy())
+                    app.albums.update(album.copy())
                 } else {
-                    app.Albums.create(Album.copy())
+                    app.albums.create(album.copy())
                 }
                 setResult(RESULT_OK)
                 finish()
 
             } else {
                 when {
-                    Album.title.isEmpty() -> Snackbar.make(it, getString(R.string.enter_Album_title), Snackbar.LENGTH_LONG).show()
-                    existingAlbum != null -> Snackbar.make(it, getString(R.string.Album_duplicate_title), Snackbar.LENGTH_LONG).show()
-                    Album.description.isEmpty() -> Snackbar.make(it, getString(R.string.enter_Album_description), Snackbar.LENGTH_LONG).show()
-                    Album.description.length > 750 -> Snackbar.make(it, getString(R.string.Album_description_too_long), Snackbar.LENGTH_LONG).show()
-                    Album.image == Uri.EMPTY -> Snackbar.make(it, getString(R.string.enter_Album_image), Snackbar.LENGTH_LONG).show()
+                    album.albumName.isEmpty() -> Snackbar.make(it, getString(R.string.enter_album_title), Snackbar.LENGTH_LONG).show()
+                    existingAlbum != null -> Snackbar.make(it, getString(R.string.album_duplicate_title), Snackbar.LENGTH_LONG).show()
+                    album.artist.isEmpty() -> Snackbar.make(it, getString(R.string.hint_albumArtist), Snackbar.LENGTH_LONG).show()
+                    album.albumDescription.isEmpty() -> Snackbar.make(it, getString(R.string.enter_album_description), Snackbar.LENGTH_LONG).show()
+                    album.albumDescription.length > 750 -> Snackbar.make(it, getString(R.string.album_description_too_long), Snackbar.LENGTH_LONG).show()
+                    album.albumGenre == "Select Genre" -> Snackbar.make(it, getString(R.string.hint_albumGenre), Snackbar.LENGTH_LONG).show()
+                    album.albumReleaseDate.isEmpty() -> Snackbar.make(it, getString(R.string.hint_albumReleaseDate), Snackbar.LENGTH_LONG).show()
+                    album.cost <= 0 -> Snackbar.make(it, getString(R.string.hint_albumCost), Snackbar.LENGTH_LONG).show()
+                    album.albumImage == Uri.EMPTY -> Snackbar.make(it, getString(R.string.enter_album_image), Snackbar.LENGTH_LONG).show()
                 }
             }
         }
-
 
         binding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
         }
         registerImagePickerCallback()
 
-        binding.AlbumYear.setOnClickListener {
+        // Date Picker for Album Release Date
+        binding.albumReleaseDate.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
 
             val datePicker = DatePickerDialog(this, { _, selectedYear, _, _ ->
-                binding.AlbumYear.setText(selectedYear.toString())
+                binding.albumReleaseDate.setText(selectedYear.toString())
             }, year, 0, 1)
 
             datePicker.show()
         }
 
-    }
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    true
+                }
+                R.id.nav_albums -> {
+                    startActivity(Intent(this, AlbumListActivity::class.java))
+                    true
+                }
+                R.id.nav_favorites -> {
+                    startActivity(Intent(this, FavoritesActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
 
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_album, menu)
@@ -115,7 +150,7 @@ class AlbumActivity : AppCompatActivity() {
                 finish()
             }
             R.id.item_delete -> {
-                app.Albums.delete(Album)
+                app.albums.delete(album)
                 setResult(RESULT_OK)
                 finish()
             }
@@ -125,34 +160,26 @@ class AlbumActivity : AppCompatActivity() {
 
     private fun registerImagePickerCallback() {
         imageIntentLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { result ->
-                when(result.resultCode){
-                    RESULT_OK -> {
-                        if (result.data != null) {
-                            i("Got Result ${result.data!!.data}")
-                            Album.image = result.data!!.data!!
-                            Picasso.get()
-                                .load(Album.image)
-                                .resize(800, 600)
-                                .into(binding.AlbumImage)
-                            binding.chooseImage.setText(R.string.change_Album_image)
-                        } // end of if
-                    }
-                    RESULT_CANCELED -> { } else -> { }
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK && result.data != null) {
+                    i("Got Result ${result.data!!.data}")
+                    album.albumImage = result.data!!.data!!
+                    Picasso.get()
+                        .load(album.albumImage)
+                        .resize(800, 600)
+                        .into(binding.albumImage)
+                    binding.chooseImage.setText(R.string.change_album_image)
                 }
             }
 
-        if (intent.hasExtra("Album_edit")) {
+        if (intent.hasExtra("album_edit")) {
             Picasso.get()
-                .load(Album.image)
+                .load(album.albumImage)
                 .resize(800, 600)
-                .into(binding.AlbumImage)
-            if (Album.image != Uri.EMPTY) {
-                binding.chooseImage.setText(R.string.change_Album_image)
+                .into(binding.albumImage)
+            if (album.albumImage != Uri.EMPTY) {
+                binding.chooseImage.setText(R.string.change_album_image)
             }
         }
-
     }
-
 }
