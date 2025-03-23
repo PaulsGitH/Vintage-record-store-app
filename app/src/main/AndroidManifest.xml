@@ -29,7 +29,7 @@
             android:exported="true"/>
 
         <activity
-            android:name="ie.setu.album.activities.FavouritesActivity"
+            android:name="ie.setu.album.activities.FavoritesActivity"
             android:exported="true"/>
 
     </application>

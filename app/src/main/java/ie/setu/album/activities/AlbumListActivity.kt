@@ -46,7 +46,7 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
                 }
                 R.id.nav_albums -> true
                 R.id.nav_favorites -> {
-                    startActivity(Intent(this, FavouritesActivity::class.java))
+                    startActivity(Intent(this, FavoritesActivity::class.java))
                     true
                 }
                 else -> false

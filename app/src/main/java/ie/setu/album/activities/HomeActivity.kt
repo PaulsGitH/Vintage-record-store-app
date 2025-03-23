@@ -26,7 +26,7 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_favorites -> {
-                    startActivity(Intent(this, FavouritesActivity::class.java))
+                    startActivity(Intent(this, FavoritesActivity::class.java))
                     true
                 }
                 else -> false

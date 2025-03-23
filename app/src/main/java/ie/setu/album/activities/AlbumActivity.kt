@@ -20,7 +20,7 @@ import ie.setu.Album.main.MainApp
 import ie.setu.Album.models.AlbumModel
 import ie.setu.album.activities.AlbumListActivity
 import ie.setu.album.activities.HomeActivity
-import ie.setu.album.activities.FavouritesActivity
+import ie.setu.album.activities.FavoritesActivity
 import timber.log.Timber.i
 
 class AlbumActivity : AppCompatActivity() {
@@ -129,7 +129,7 @@ class AlbumActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_favorites -> {
-                    startActivity(Intent(this, FavouritesActivity::class.java))
+                    startActivity(Intent(this, FavoritesActivity::class.java))
                     true
                 }
                 else -> false
