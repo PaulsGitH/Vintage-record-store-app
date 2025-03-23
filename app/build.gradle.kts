@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
+    id("org.jetbrains.dokka") version "1.8.10"
+    id("org.jlleitschuh.gradle.ktlint") version "11.3.2"
 }
 
 android {
@@ -38,6 +40,20 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    tasks.dokkaHtml.configure {
+        outputDirectory.set(buildDir.resolve("dokka"))
+    }
+
+    ktlint {
+        debug.set(true)
+        verbose.set(true)
+        android.set(true)
+        outputToConsole.set(true)
+        outputColorName.set("RED")
+        ignoreFailures.set(false)
+    }
+
 
 }
 
