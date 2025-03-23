@@ -7,34 +7,41 @@ internal fun getId() = lastId++
 
 class AlbumMemStore : AlbumStore {
 
-    val Albums = ArrayList<AlbumModel>()
+    val albums = ArrayList<AlbumModel>()
 
     override fun findAll(): List<AlbumModel> {
-        return Albums
+        return albums
     }
 
-    override fun create(Album: AlbumModel) {
-        Album.id = getId()
-        Albums.add(Album)
+    override fun create(album: AlbumModel) {
+        album.albumId = getId()
+        albums.add(album)
         logAll()
     }
 
-    override fun update(Album: AlbumModel) {
-        val foundAlbum: AlbumModel? = Albums.find { p -> p.id == Album.id }
+    override fun update(album: AlbumModel) {
+        val foundAlbum: AlbumModel? = albums.find { a -> a.albumId == album.albumId }
         if (foundAlbum != null) {
-            foundAlbum.title = Album.title
-            foundAlbum.description = Album.description
-            foundAlbum.image = Album.image
+            foundAlbum.albumName = album.albumName
+            foundAlbum.albumImage = album.albumImage
+            foundAlbum.albumReleaseDate = album.albumReleaseDate
+            foundAlbum.albumGenre = album.albumGenre
+            foundAlbum.artist = album.artist
+            foundAlbum.rating = album.rating
+            foundAlbum.cost = album.cost
+            foundAlbum.trackList = album.trackList
+            foundAlbum.linkToAlbumWebsite = album.linkToAlbumWebsite
+            foundAlbum.sampleSongYouTube = album.sampleSongYouTube
             logAll()
         }
     }
 
-    override fun delete(Album: AlbumModel) {
-        Albums.removeIf { it.id == Album.id }
+    override fun delete(album: AlbumModel) {
+        albums.remove(album)
         logAll()
     }
 
     private fun logAll() {
-        Albums.forEach { i("$it") }
+        albums.forEach { i("$it") }
     }
 }
