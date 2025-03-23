@@ -33,9 +33,9 @@ class AlbumAdapter constructor(private var Albums: List<AlbumModel>,
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(Album: AlbumModel, listener: AlbumListener) {
-            binding.AlbumTitle.text = Album.title
-            binding.AlbumDescription.text = Album.description
-            Picasso.get().load(Album.image).resize(200,200).into(binding.imageIcon)
+            binding.AlbumTitle.text = Album.albumName
+            binding.AlbumDescription.text = Album.albumDescription
+            Picasso.get().load(Album.albumImage).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onAlbumClick(Album)}
         }
     }

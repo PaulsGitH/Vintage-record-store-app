@@ -33,7 +33,7 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = AlbumAdapter(app.Albums.findAll(), this)
+        binding.recyclerView.adapter = AlbumAdapter(app.albums.findAll(), this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -62,6 +62,7 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
                 val launcherIntent = Intent(this, AlbumActivity::class.java)
                 getResult.launch(launcherIntent)
             }
+
         }
         return super.onOptionsItemSelected(item)
     }
@@ -72,23 +73,23 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
                 (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.Albums.findAll().size)
-                binding.recyclerView.adapter?.notifyDataSetChanged() // necessary to refresh menu after deletion of item
+                notifyItemRangeChanged(0,app.albums.findAll().size)
+                binding.recyclerView.adapter?.notifyDataSetChanged() // necessary to refresh menu after album deletion
             }
             if (it.resultCode == Activity.RESULT_CANCELED) {
                 Snackbar.make(binding.root, "Album Add Cancelled", Snackbar.LENGTH_LONG).show()
             }
         }
 
-    override fun onAlbumClick(Album: AlbumModel) {
+    override fun onAlbumClick(album: AlbumModel) {
         val launcherIntent = Intent(this, AlbumActivity::class.java)
-        launcherIntent.putExtra("Album_edit", Album)
+        launcherIntent.putExtra("album_edit", album)
         getResult.launch(launcherIntent)
     }
 
     private fun filterAlbums(query: String) {
-        val filteredList = app.Albums.findAll().filter {
-            it.title.contains(query, ignoreCase = true)
+        val filteredList = app.albums.findAll().filter {
+            it.albumName.contains(query, ignoreCase = true)
         }
 
         (binding.recyclerView.adapter as AlbumAdapter).updateList(filteredList)

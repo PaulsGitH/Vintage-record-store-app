@@ -7,6 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class AlbumModel(var albumId: Long = 0,
                       var albumName: String = "",
+                      var albumDescription: String = "",
                       var albumImage: Uri = Uri.EMPTY,
                       var albumReleaseDate: String = "",
                       var albumGenre: String = "",

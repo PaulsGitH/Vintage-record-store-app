@@ -7,7 +7,7 @@ import timber.log.Timber.i
 
 class MainApp : Application() {
 
-    val Albums = AlbumMemStore()
+    val albums = AlbumMemStore()
 
     override fun onCreate() {
         super.onCreate()
