@@ -1,4 +1,4 @@
-package ie.setu.Album.activities
+package ie.setu.album.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import ie.setu.Album.R
+import ie.setu.Album.activities.AlbumActivity
 import ie.setu.Album.adapters.AlbumAdapter
 import ie.setu.Album.adapters.AlbumListener
 import ie.setu.Album.databinding.ActivityAlbumListBinding

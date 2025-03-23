@@ -18,6 +18,9 @@ import ie.setu.Album.databinding.ActivityAlbumBinding
 import ie.setu.Album.helpers.showImagePicker
 import ie.setu.Album.main.MainApp
 import ie.setu.Album.models.AlbumModel
+import ie.setu.album.activities.AlbumListActivity
+import ie.setu.album.activities.HomeActivity
+import ie.setu.album.activities.FavoritesActivity
 import timber.log.Timber.i
 
 class AlbumActivity : AppCompatActivity() {
