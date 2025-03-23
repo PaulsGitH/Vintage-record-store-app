@@ -33,4 +33,8 @@
         <item>Hip-Hop</item>
         <item>Country</item>
     </string-array>
+
+    <string name="nav_home">Home</string>
+    <string name="nav_albums">Albums</string>
+    <string name="nav_favorites">Favorites</string>
 </resources>
