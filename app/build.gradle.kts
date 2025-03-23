@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
+    id("org.jetbrains.dokka") version "1.8.10"
 }
 
 android {
@@ -38,6 +39,11 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    tasks.dokkaHtml.configure {
+        outputDirectory.set(buildDir.resolve("dokka"))
+    }
+
 
 }
 
