@@ -40,7 +40,7 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
             when (item.itemId) {
                 R.id.nav_home -> {
                     val intent = Intent(this, HomeActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) // Ensures proper navigation
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(intent)
                     true
                 }
@@ -107,10 +107,7 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
     }
 
     private fun filterAlbums(query: String) {
-        val filteredList = app.albums.findAll().filter {
-            it.albumName.contains(query, ignoreCase = true)
-        }
-
+        val filteredList = app.albums.searchByName(query)
         (binding.recyclerView.adapter as AlbumAdapter).updateList(filteredList)
     }
 

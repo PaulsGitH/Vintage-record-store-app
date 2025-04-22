@@ -23,6 +23,7 @@ class AlbumMemStore : AlbumStore {
         val foundAlbum: AlbumModel? = albums.find { a -> a.albumId == album.albumId }
         if (foundAlbum != null) {
             foundAlbum.albumName = album.albumName
+            foundAlbum.albumDescription = album.albumDescription
             foundAlbum.albumImage = album.albumImage
             foundAlbum.albumReleaseDate = album.albumReleaseDate
             foundAlbum.albumGenre = album.albumGenre
@@ -44,4 +45,11 @@ class AlbumMemStore : AlbumStore {
     private fun logAll() {
         albums.forEach { i("$it") }
     }
+
+    fun searchByName(query: String): List<AlbumModel> {
+        return albums.filter {
+            it.albumName.contains(query, ignoreCase = true)
+        }
+    }
+
 }
