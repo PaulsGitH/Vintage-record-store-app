@@ -45,4 +45,11 @@ class AlbumMemStore : AlbumStore {
     private fun logAll() {
         albums.forEach { i("$it") }
     }
+
+    fun searchByName(query: String): List<AlbumModel> {
+        return albums.filter {
+            it.albumName.contains(query, ignoreCase = true)
+        }
+    }
+
 }
