@@ -23,6 +23,7 @@ class AlbumMemStore : AlbumStore {
         val foundAlbum: AlbumModel? = albums.find { a -> a.albumId == album.albumId }
         if (foundAlbum != null) {
             foundAlbum.albumName = album.albumName
+            foundAlbum.albumDescription = album.albumDescription
             foundAlbum.albumImage = album.albumImage
             foundAlbum.albumReleaseDate = album.albumReleaseDate
             foundAlbum.albumGenre = album.albumGenre
