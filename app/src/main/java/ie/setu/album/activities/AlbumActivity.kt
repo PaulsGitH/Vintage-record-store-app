@@ -110,10 +110,13 @@ class AlbumActivity : AppCompatActivity() {
         binding.albumReleaseDate.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val datePicker = DatePickerDialog(this, { _, selectedYear, _, _ ->
-                binding.albumReleaseDate.setText(selectedYear.toString())
-            }, year, 0, 1)
+            val datePicker = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
+                val selectedDate = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear)
+                binding.albumReleaseDate.setText(selectedDate)
+            }, year, month, day)
 
             datePicker.show()
         }
