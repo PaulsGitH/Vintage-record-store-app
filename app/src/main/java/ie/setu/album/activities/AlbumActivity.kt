@@ -5,9 +5,12 @@ import android.content.Intent
 import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Bundle
+import android.text.InputType
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -119,6 +122,24 @@ class AlbumActivity : AppCompatActivity() {
             }, year, month, day)
 
             datePicker.show()
+        }
+
+        // Keep count of tracks
+        var trackCount = 0
+
+        binding.addTrackButton.setOnClickListener {
+            trackCount++
+            val trackInput = EditText(this).apply {
+                hint = getString(R.string.enter_track_name_hint, trackCount)
+                inputType = InputType.TYPE_CLASS_TEXT
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    topMargin = 8
+                }
+            }
+            binding.trackListContainer.addView(trackInput)
         }
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
