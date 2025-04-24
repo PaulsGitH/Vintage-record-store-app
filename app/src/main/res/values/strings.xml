@@ -43,4 +43,5 @@
     <string name="track_list_label">Track Listing</string>
     <string name="add_track_button">Add Track</string>
     <string name="enter_track_name_hint">Track %1$d - Enter song title</string>
+    <string name="enter_at_least_one_track">Please enter at least one track</string>
 </resources>

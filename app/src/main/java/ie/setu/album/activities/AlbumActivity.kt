@@ -74,12 +74,26 @@ class AlbumActivity : AppCompatActivity() {
             album.cost = binding.albumCost.text.toString().toDoubleOrNull() ?: 0.0
             album.rating = binding.albumRating.rating.toInt()
 
+            // Builds track list from the addtrack buttons EditText
+            val trackMap = mutableMapOf<String, String>()
+            for (i in 0 until binding.trackListContainer.childCount) {
+                val view = binding.trackListContainer.getChildAt(i)
+                if (view is EditText) {
+                    val trackTitle = view.text.toString().trim()
+                    if (trackTitle.isNotEmpty()) {
+                        trackMap["Track ${i + 1}"] = trackTitle
+                    }
+                }
+            }
+            album.trackList = trackMap
+
             val existingAlbum = app.albums.findAll().find { it.albumName == album.albumName }
 
             if (album.albumName.isNotEmpty() && album.artist.isNotEmpty() &&
                 album.albumDescription.isNotEmpty() && album.albumDescription.length <= 750 &&
                 album.albumGenre != "Select Genre" && album.albumReleaseDate.isNotEmpty() &&
-                album.cost > 0 && album.albumImage != Uri.EMPTY && (edit || existingAlbum == null)) {
+                album.cost > 0 && album.albumImage != Uri.EMPTY && album.trackList.isNotEmpty() &&
+                (edit || existingAlbum == null)) {
 
                 if (edit) {
                     app.albums.update(album.copy())
@@ -100,6 +114,7 @@ class AlbumActivity : AppCompatActivity() {
                     album.albumReleaseDate.isEmpty() -> Snackbar.make(it, getString(R.string.hint_albumReleaseDate), Snackbar.LENGTH_LONG).show()
                     album.cost <= 0 -> Snackbar.make(it, getString(R.string.hint_albumCost), Snackbar.LENGTH_LONG).show()
                     album.albumImage == Uri.EMPTY -> Snackbar.make(it, getString(R.string.enter_album_image), Snackbar.LENGTH_LONG).show()
+                    album.trackList.isEmpty() -> Snackbar.make(it, getString(R.string.enter_at_least_one_track), Snackbar.LENGTH_LONG).show()
                 }
             }
         }
