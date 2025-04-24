@@ -63,6 +63,24 @@ class AlbumActivity : AppCompatActivity() {
             binding.albumReleaseDate.setText(album.albumReleaseDate)
             binding.albumGenre.setSelection(genres.indexOf(album.albumGenre))
             binding.albumRating.rating = album.rating.toFloat()
+
+            if (album.trackList.isNotEmpty()) {
+                for ((key, value) in album.trackList.toSortedMap()) {
+                    val trackInput = EditText(this).apply {
+                        hint = key
+                        setText(value)
+                        inputType = InputType.TYPE_CLASS_TEXT
+                        layoutParams = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                        ).apply {
+                            topMargin = 8
+                        }
+                    }
+                    binding.trackListContainer.addView(trackInput)
+                }
+            }
+
         }
 
         binding.btnAdd.setOnClickListener {
