@@ -63,6 +63,7 @@ class AlbumActivity : AppCompatActivity() {
             binding.albumReleaseDate.setText(album.albumReleaseDate)
             binding.albumGenre.setSelection(genres.indexOf(album.albumGenre))
             binding.albumRating.rating = album.rating.toFloat()
+            binding.sampleSongYouTube.setText(album.sampleSongYouTube)
 
             if (album.trackList.isNotEmpty()) {
                 for ((key, value) in album.trackList.toSortedMap()) {
@@ -80,6 +81,17 @@ class AlbumActivity : AppCompatActivity() {
                     binding.trackListContainer.addView(trackInput)
                 }
             }
+
+            binding.playYouTubeButton.setOnClickListener {
+                val youtubeUrl = binding.sampleSongYouTube.text.toString().trim()
+                if (youtubeUrl.isNotEmpty()) {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl))
+                    startActivity(intent)
+                } else {
+                    Snackbar.make(it, getString(R.string.invalid_youtube_url), Snackbar.LENGTH_LONG).show()
+                }
+            }
+
 
         }
 
@@ -104,6 +116,7 @@ class AlbumActivity : AppCompatActivity() {
                 }
             }
             album.trackList = trackMap
+            album.sampleSongYouTube = binding.sampleSongYouTube.text.toString().trim()
 
             val existingAlbum = app.albums.findAll().find { it.albumName == album.albumName }
 
@@ -111,7 +124,8 @@ class AlbumActivity : AppCompatActivity() {
                 album.albumDescription.isNotEmpty() && album.albumDescription.length <= 750 &&
                 album.albumGenre != "Select Genre" && album.albumReleaseDate.isNotEmpty() &&
                 album.cost > 0 && album.albumImage != Uri.EMPTY && album.trackList.isNotEmpty() &&
-                (edit || existingAlbum == null)) {
+                album.sampleSongYouTube.isNotEmpty() && (album.sampleSongYouTube.contains("youtube.com")
+                        || album.sampleSongYouTube.contains("youtu.be")) && (edit || existingAlbum == null)) {
 
                 if (edit) {
                     app.albums.update(album.copy())
@@ -133,6 +147,9 @@ class AlbumActivity : AppCompatActivity() {
                     album.cost <= 0 -> Snackbar.make(it, getString(R.string.hint_albumCost), Snackbar.LENGTH_LONG).show()
                     album.albumImage == Uri.EMPTY -> Snackbar.make(it, getString(R.string.enter_album_image), Snackbar.LENGTH_LONG).show()
                     album.trackList.isEmpty() -> Snackbar.make(it, getString(R.string.enter_at_least_one_track), Snackbar.LENGTH_LONG).show()
+                    album.sampleSongYouTube.isEmpty() -> Snackbar.make(it, getString(R.string.enter_album_youtube), Snackbar.LENGTH_LONG).show()
+                    !album.sampleSongYouTube.contains("youtube.com") && !album.sampleSongYouTube.contains("youtu.be") ->
+                        Snackbar.make(it, getString(R.string.youtube_link_only), Snackbar.LENGTH_LONG).show()
                 }
             }
         }

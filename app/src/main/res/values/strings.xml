@@ -46,4 +46,9 @@
     <string name="enter_at_least_one_track">Please enter at least one track</string>
 
     <string name="hint_album_youtube_link">Enter YouTube video URL</string>
+    <string name="enter_album_youtube">Enter a YouTube link for a sample song</string>
+    <string name="play_sample_song">Play Sample Song</string>
+    <string name="invalid_youtube_url">Please enter a valid YouTube link</string>
+    <string name="youtube_link_only">Please enter a valid YouTube link</string>
+
 </resources>
