@@ -10,11 +10,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.appbar.AppBarLayout
+
+    <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +40,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:orientation="vertical">
 
                 <EditText
@@ -142,6 +143,21 @@
                     android:layout_margin="16dp"
                     android:text="@string/add_track_button"
                     android:backgroundTint="?attr/colorSecondary"/>
+
+                <EditText
+                    android:id="@+id/sampleSongYouTube"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_album_youtube_link"
+                    android:inputType="textUri"
+                    android:layout_marginTop="16dp" />
+
+                <WebView
+                    android:id="@+id/youtubeWebView"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="8dp"/>
+
                 <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
