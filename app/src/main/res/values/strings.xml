@@ -39,4 +39,8 @@
     <string name="nav_favorites">Favorites</string>
     <string name="menu_favorites">Favorites</string>
     <string name="title_home">Home</string>
+
+    <string name="track_list_label">Track Listing</string>
+    <string name="add_track_button">Add Track</string>
+    <string name="enter_track_name_hint">Track %1$d - Enter song title</string>
 </resources>

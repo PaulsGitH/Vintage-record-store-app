@@ -30,7 +30,7 @@ data class AlbumModel(var albumId: Long = 0,
                       var artist: String = "",
                       var rating: Int = 1,
                       var cost: Double = 0.0,
-                      var trackList: Map<String, String> = emptyMap(),
+                      var trackList: MutableMap<String, String> = mutableMapOf(),
                       var linkToAlbumWebsite: String = "",
                       var sampleSongYouTube: String = ""
 ) : Parcelable
