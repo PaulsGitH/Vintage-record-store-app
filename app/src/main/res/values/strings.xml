@@ -56,4 +56,10 @@
     <string name="enter_valid_album_website">Please enter a valid website URL</string>
     <string name="button_open_website">Open Album Website</string>
 
+    <string name="sort_by_artist">Sort by Artist</string>
+    <string name="sort_by_genre">Sort by Genre</string>
+    <string name="sort_by_rating">Sort by Rating</string>
+    <string name="sort_by_price_high">Sort by Price (High → Low)</string>
+    <string name="sort_by_price_low">Sort by Price (Low → High)</string>
+
 </resources>
