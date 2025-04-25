@@ -58,7 +58,8 @@
 
     <string name="sort_by_artist">Sort by Artist</string>
     <string name="sort_by_genre">Sort by Genre</string>
-    <string name="sort_by_rating">Sort by Rating</string>
+    <string name="sort_by_rating_high">Sort by Rating (Highest First)</string>
+    <string name="sort_by_rating_low">Sort by Rating (Lowest First)</string>
     <string name="sort_by_price_high">Sort by Price (High → Low)</string>
     <string name="sort_by_price_low">Sort by Price (Low → High)</string>
 

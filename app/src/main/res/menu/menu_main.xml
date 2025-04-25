@@ -24,8 +24,12 @@
         android:title="@string/sort_by_genre"
         app:showAsAction="never" />
     <item
-        android:id="@+id/item_sort_rating"
-        android:title="@string/sort_by_rating"
+        android:id="@+id/item_sort_rating_high"
+        android:title="@string/sort_by_rating_high"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_sort_rating_low"
+        android:title="@string/sort_by_rating_low"
         app:showAsAction="never" />
     <item
         android:id="@+id/item_sort_price_high"

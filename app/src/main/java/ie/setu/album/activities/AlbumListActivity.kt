@@ -80,6 +80,38 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
             R.id.item_add -> {
                 val launcherIntent = Intent(this, AlbumActivity::class.java)
                 getResult.launch(launcherIntent)
+                return true
+            }
+
+            R.id.item_sort_artist -> {
+                showAlbums(app.albums.findAll().sortedBy { it.artist })
+                return true
+            }
+
+            R.id.item_sort_genre -> {
+                showAlbums(app.albums.findAll().sortedBy { it.albumGenre })
+                return true
+            }
+
+            R.id.item_sort_price_high -> {
+                val sorted = app.albums.findAll().sortedByDescending { it.cost }
+                (binding.recyclerView.adapter as AlbumAdapter).updateList(sorted)
+            }
+
+            R.id.item_sort_price_low -> {
+                val sorted = app.albums.findAll().sortedBy { it.cost }
+                (binding.recyclerView.adapter as AlbumAdapter).updateList(sorted)
+            }
+
+            R.id.item_sort_rating_high -> {
+                val sorted = app.albums.findAll().sortedByDescending { it.rating }
+                (binding.recyclerView.adapter as AlbumAdapter).updateList(sorted)
+                return true
+            }
+            R.id.item_sort_rating_low -> {
+                val sorted = app.albums.findAll().sortedBy { it.rating }
+                (binding.recyclerView.adapter as AlbumAdapter).updateList(sorted)
+                return true
             }
 
         }
@@ -91,9 +123,8 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
-                (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.albums.findAll().size)
-                binding.recyclerView.adapter?.notifyDataSetChanged() // necessary to refresh menu after album deletion
+                val updatedList = app.albums.findAll()
+                (binding.recyclerView.adapter as AlbumAdapter).updateList(updatedList)
             }
             if (it.resultCode == Activity.RESULT_CANCELED) {
                 Snackbar.make(binding.root, "Album Add Cancelled", Snackbar.LENGTH_LONG).show()
@@ -104,6 +135,10 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
         val launcherIntent = Intent(this, AlbumActivity::class.java)
         launcherIntent.putExtra("album_edit", album)
         getResult.launch(launcherIntent)
+    }
+
+    fun showAlbums(albums: List<AlbumModel>) {
+        (binding.recyclerView.adapter as AlbumAdapter).updateList(albums)
     }
 
     private fun filterAlbums(query: String) {
