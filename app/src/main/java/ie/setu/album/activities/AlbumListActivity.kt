@@ -142,7 +142,7 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
     }
 
     private fun filterAlbums(query: String) {
-        val filteredList = app.albums.searchByName(query)
+        val filteredList = app.albums.searchAll(query)
         (binding.recyclerView.adapter as AlbumAdapter).updateList(filteredList)
     }
 
