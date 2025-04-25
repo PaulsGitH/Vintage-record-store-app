@@ -52,5 +52,8 @@
     <string name="youtube_link_only">Please enter a valid YouTube link</string>
 
     <string name="hint_album_website">Enter artist website</string>
+    <string name="enter_album_website">Please enter the artist website</string>
+    <string name="enter_valid_album_website">Please enter a valid website URL</string>
+    <string name="button_open_website">Open Album Website</string>
 
 </resources>

@@ -6,6 +6,7 @@ import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
+import android.util.Patterns
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
@@ -64,6 +65,7 @@ class AlbumActivity : AppCompatActivity() {
             binding.albumGenre.setSelection(genres.indexOf(album.albumGenre))
             binding.albumRating.rating = album.rating.toFloat()
             binding.sampleSongYouTube.setText(album.sampleSongYouTube)
+            binding.linkToAlbumWebsite.setText(album.linkToAlbumWebsite)
 
             if (album.trackList.isNotEmpty()) {
                 for ((key, value) in album.trackList.toSortedMap()) {
@@ -92,6 +94,16 @@ class AlbumActivity : AppCompatActivity() {
                 }
             }
 
+            binding.openWebsiteButton.setOnClickListener {
+                val url = album.linkToAlbumWebsite.trim()
+                if (Patterns.WEB_URL.matcher(url).matches()) {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    startActivity(intent)
+                } else {
+                    Snackbar.make(it, getString(R.string.enter_valid_album_website), Snackbar.LENGTH_LONG).show()
+                }
+            }
+
 
         }
 
@@ -117,6 +129,7 @@ class AlbumActivity : AppCompatActivity() {
             }
             album.trackList = trackMap
             album.sampleSongYouTube = binding.sampleSongYouTube.text.toString().trim()
+            album.linkToAlbumWebsite = binding.linkToAlbumWebsite.text.toString().trim()
 
             val existingAlbum = app.albums.findAll().find { it.albumName == album.albumName }
 
@@ -124,8 +137,11 @@ class AlbumActivity : AppCompatActivity() {
                 album.albumDescription.isNotEmpty() && album.albumDescription.length <= 750 &&
                 album.albumGenre != "Select Genre" && album.albumReleaseDate.isNotEmpty() &&
                 album.cost > 0 && album.albumImage != Uri.EMPTY && album.trackList.isNotEmpty() &&
-                album.sampleSongYouTube.isNotEmpty() && (album.sampleSongYouTube.contains("youtube.com")
-                        || album.sampleSongYouTube.contains("youtu.be")) && (edit || existingAlbum == null)) {
+                album.sampleSongYouTube.isNotEmpty() &&
+                (album.sampleSongYouTube.contains("youtube.com") || album.sampleSongYouTube.contains("youtu.be")) &&
+                Patterns.WEB_URL.matcher(album.linkToAlbumWebsite).matches() &&
+                (edit || existingAlbum == null)
+            ) {
 
                 if (edit) {
                     app.albums.update(album.copy())
@@ -150,6 +166,7 @@ class AlbumActivity : AppCompatActivity() {
                     album.sampleSongYouTube.isEmpty() -> Snackbar.make(it, getString(R.string.enter_album_youtube), Snackbar.LENGTH_LONG).show()
                     !album.sampleSongYouTube.contains("youtube.com") && !album.sampleSongYouTube.contains("youtu.be") ->
                         Snackbar.make(it, getString(R.string.youtube_link_only), Snackbar.LENGTH_LONG).show()
+                    !Patterns.WEB_URL.matcher(album.linkToAlbumWebsite).matches() -> Snackbar.make(it, getString(R.string.enter_valid_album_website), Snackbar.LENGTH_LONG).show()
                 }
             }
         }
