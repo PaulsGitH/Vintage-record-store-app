@@ -41,6 +41,15 @@
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 tools:text="A Description" />
 
+            <RatingBar
+                android:id="@+id/albumCardRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1.0"
+                android:isIndicator="true"
+                android:layout_marginTop="4dp" />
+
         </LinearLayout>
 
     </LinearLayout>

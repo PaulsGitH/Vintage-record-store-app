@@ -15,4 +15,35 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/item_sort_artist"
+        android:title="@string/sort_by_artist"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_sort_genre"
+        android:title="@string/sort_by_genre"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_sort_rating_high"
+        android:title="@string/sort_by_rating_high"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_sort_rating_low"
+        android:title="@string/sort_by_rating_low"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_sort_price_high"
+        android:title="@string/sort_by_price_high"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_sort_price_low"
+        android:title="@string/sort_by_price_low"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/item_filter_genre"
+        android:title="@string/filter_by_genre"
+        app:showAsAction="never" />
+
+
 </menu>

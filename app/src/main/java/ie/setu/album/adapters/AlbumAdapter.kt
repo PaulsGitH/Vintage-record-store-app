@@ -37,6 +37,7 @@ class AlbumAdapter constructor(private var Albums: List<AlbumModel>,
             binding.AlbumDescription.text = Album.albumDescription
             Picasso.get().load(Album.albumImage).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onAlbumClick(Album)}
+            binding.albumCardRating.rating = Album.rating.toFloat()
         }
     }
 }

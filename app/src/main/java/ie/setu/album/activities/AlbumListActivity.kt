@@ -1,6 +1,7 @@
 package ie.setu.album.activities
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -80,6 +81,43 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
             R.id.item_add -> {
                 val launcherIntent = Intent(this, AlbumActivity::class.java)
                 getResult.launch(launcherIntent)
+                return true
+            }
+
+            R.id.item_sort_artist -> {
+                showAlbums(app.albums.findAll().sortedBy { it.artist })
+                return true
+            }
+
+            R.id.item_sort_genre -> {
+                showAlbums(app.albums.findAll().sortedBy { it.albumGenre })
+                return true
+            }
+
+            R.id.item_sort_price_high -> {
+                val sorted = app.albums.findAll().sortedByDescending { it.cost }
+                (binding.recyclerView.adapter as AlbumAdapter).updateList(sorted)
+            }
+
+            R.id.item_sort_price_low -> {
+                val sorted = app.albums.findAll().sortedBy { it.cost }
+                (binding.recyclerView.adapter as AlbumAdapter).updateList(sorted)
+            }
+
+            R.id.item_sort_rating_high -> {
+                val sorted = app.albums.findAll().sortedByDescending { it.rating }
+                (binding.recyclerView.adapter as AlbumAdapter).updateList(sorted)
+                return true
+            }
+            R.id.item_sort_rating_low -> {
+                val sorted = app.albums.findAll().sortedBy { it.rating }
+                (binding.recyclerView.adapter as AlbumAdapter).updateList(sorted)
+                return true
+            }
+
+            R.id.item_filter_genre -> {
+                filterByGenre()
+                return true
             }
 
         }
@@ -91,9 +129,8 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
-                (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.albums.findAll().size)
-                binding.recyclerView.adapter?.notifyDataSetChanged() // necessary to refresh menu after album deletion
+                val updatedList = app.albums.findAll()
+                (binding.recyclerView.adapter as AlbumAdapter).updateList(updatedList)
             }
             if (it.resultCode == Activity.RESULT_CANCELED) {
                 Snackbar.make(binding.root, "Album Add Cancelled", Snackbar.LENGTH_LONG).show()
@@ -106,11 +143,28 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
         getResult.launch(launcherIntent)
     }
 
+    fun showAlbums(albums: List<AlbumModel>) {
+        (binding.recyclerView.adapter as AlbumAdapter).updateList(albums)
+    }
+
     private fun filterAlbums(query: String) {
-        val filteredList = app.albums.searchByName(query)
+        val filteredList = app.albums.searchAll(query)
         (binding.recyclerView.adapter as AlbumAdapter).updateList(filteredList)
     }
 
-
+    private fun filterByGenre() {
+        val genres = resources.getStringArray(R.array.album_genres)
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Choose Genre")
+        builder.setItems(genres) { _, which ->
+            val selectedGenre = genres[which]
+            val filteredList = app.albums.findAll().filter { it.albumGenre == selectedGenre }
+            (binding.recyclerView.adapter as AlbumAdapter).updateList(filteredList)
+        }
+        builder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.show()
+    }
 
 }
