@@ -174,7 +174,7 @@ class AlbumActivity : AppCompatActivity() {
             datePicker.show()
         }
 
-        // Keep count of tracks
+        // Keep count of tracks for the tracklist segment of the album page
         var trackCount = 0
 
         binding.addTrackButton.setOnClickListener {

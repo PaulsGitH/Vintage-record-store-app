@@ -160,6 +160,14 @@
                     android:layout_marginTop="16dp"
                     android:backgroundTint="?attr/colorSecondary"/>
 
+                <EditText
+                    android:id="@+id/linkToAlbumWebsite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_album_website"
+                    android:inputType="textUri"
+                    android:layout_marginTop="16dp" />
+
                 <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"

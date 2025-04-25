@@ -51,4 +51,6 @@
     <string name="invalid_youtube_url">Please enter a valid YouTube link</string>
     <string name="youtube_link_only">Please enter a valid YouTube link</string>
 
+    <string name="hint_album_website">Enter artist website</string>
+
 </resources>
