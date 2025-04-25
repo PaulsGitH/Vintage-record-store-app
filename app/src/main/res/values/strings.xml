@@ -39,4 +39,21 @@
     <string name="nav_favorites">Favorites</string>
     <string name="menu_favorites">Favorites</string>
     <string name="title_home">Home</string>
+
+    <string name="track_list_label">Track Listing</string>
+    <string name="add_track_button">Add Track</string>
+    <string name="enter_track_name_hint">Track %1$d - Enter song title</string>
+    <string name="enter_at_least_one_track">Please enter at least one track</string>
+
+    <string name="hint_album_youtube_link">Enter YouTube video URL</string>
+    <string name="enter_album_youtube">Enter a YouTube link for a sample song</string>
+    <string name="play_sample_song">Play Sample Song</string>
+    <string name="invalid_youtube_url">Please enter a valid YouTube link</string>
+    <string name="youtube_link_only">Please enter a valid YouTube link</string>
+
+    <string name="hint_album_website">Enter artist website</string>
+    <string name="enter_album_website">Please enter the artist website</string>
+    <string name="enter_valid_album_website">Please enter a valid website URL</string>
+    <string name="button_open_website">Open Album Website</string>
+
 </resources>

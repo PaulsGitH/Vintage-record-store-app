@@ -5,9 +5,13 @@ import android.content.Intent
 import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Bundle
+import android.text.InputType
+import android.util.Patterns
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -60,6 +64,47 @@ class AlbumActivity : AppCompatActivity() {
             binding.albumReleaseDate.setText(album.albumReleaseDate)
             binding.albumGenre.setSelection(genres.indexOf(album.albumGenre))
             binding.albumRating.rating = album.rating.toFloat()
+            binding.sampleSongYouTube.setText(album.sampleSongYouTube)
+            binding.linkToAlbumWebsite.setText(album.linkToAlbumWebsite)
+
+            if (album.trackList.isNotEmpty()) {
+                for ((key, value) in album.trackList.toSortedMap()) {
+                    val trackInput = EditText(this).apply {
+                        hint = key
+                        setText(value)
+                        inputType = InputType.TYPE_CLASS_TEXT
+                        layoutParams = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                        ).apply {
+                            topMargin = 8
+                        }
+                    }
+                    binding.trackListContainer.addView(trackInput)
+                }
+            }
+
+            binding.playYouTubeButton.setOnClickListener {
+                val youtubeUrl = binding.sampleSongYouTube.text.toString().trim()
+                if (youtubeUrl.isNotEmpty()) {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl))
+                    startActivity(intent)
+                } else {
+                    Snackbar.make(it, getString(R.string.invalid_youtube_url), Snackbar.LENGTH_LONG).show()
+                }
+            }
+
+            binding.openWebsiteButton.setOnClickListener {
+                val url = album.linkToAlbumWebsite.trim()
+                if (Patterns.WEB_URL.matcher(url).matches()) {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    startActivity(intent)
+                } else {
+                    Snackbar.make(it, getString(R.string.enter_valid_album_website), Snackbar.LENGTH_LONG).show()
+                }
+            }
+
+
         }
 
         binding.btnAdd.setOnClickListener {
@@ -71,12 +116,32 @@ class AlbumActivity : AppCompatActivity() {
             album.cost = binding.albumCost.text.toString().toDoubleOrNull() ?: 0.0
             album.rating = binding.albumRating.rating.toInt()
 
+            // Builds track list from the addtrack buttons EditText
+            val trackMap = mutableMapOf<String, String>()
+            for (i in 0 until binding.trackListContainer.childCount) {
+                val view = binding.trackListContainer.getChildAt(i)
+                if (view is EditText) {
+                    val trackTitle = view.text.toString().trim()
+                    if (trackTitle.isNotEmpty()) {
+                        trackMap["Track ${i + 1}"] = trackTitle
+                    }
+                }
+            }
+            album.trackList = trackMap
+            album.sampleSongYouTube = binding.sampleSongYouTube.text.toString().trim()
+            album.linkToAlbumWebsite = binding.linkToAlbumWebsite.text.toString().trim()
+
             val existingAlbum = app.albums.findAll().find { it.albumName == album.albumName }
 
             if (album.albumName.isNotEmpty() && album.artist.isNotEmpty() &&
                 album.albumDescription.isNotEmpty() && album.albumDescription.length <= 750 &&
                 album.albumGenre != "Select Genre" && album.albumReleaseDate.isNotEmpty() &&
-                album.cost > 0 && album.albumImage != Uri.EMPTY && (edit || existingAlbum == null)) {
+                album.cost > 0 && album.albumImage != Uri.EMPTY && album.trackList.isNotEmpty() &&
+                album.sampleSongYouTube.isNotEmpty() &&
+                (album.sampleSongYouTube.contains("youtube.com") || album.sampleSongYouTube.contains("youtu.be")) &&
+                Patterns.WEB_URL.matcher(album.linkToAlbumWebsite).matches() &&
+                (edit || existingAlbum == null)
+            ) {
 
                 if (edit) {
                     app.albums.update(album.copy())
@@ -97,6 +162,11 @@ class AlbumActivity : AppCompatActivity() {
                     album.albumReleaseDate.isEmpty() -> Snackbar.make(it, getString(R.string.hint_albumReleaseDate), Snackbar.LENGTH_LONG).show()
                     album.cost <= 0 -> Snackbar.make(it, getString(R.string.hint_albumCost), Snackbar.LENGTH_LONG).show()
                     album.albumImage == Uri.EMPTY -> Snackbar.make(it, getString(R.string.enter_album_image), Snackbar.LENGTH_LONG).show()
+                    album.trackList.isEmpty() -> Snackbar.make(it, getString(R.string.enter_at_least_one_track), Snackbar.LENGTH_LONG).show()
+                    album.sampleSongYouTube.isEmpty() -> Snackbar.make(it, getString(R.string.enter_album_youtube), Snackbar.LENGTH_LONG).show()
+                    !album.sampleSongYouTube.contains("youtube.com") && !album.sampleSongYouTube.contains("youtu.be") ->
+                        Snackbar.make(it, getString(R.string.youtube_link_only), Snackbar.LENGTH_LONG).show()
+                    !Patterns.WEB_URL.matcher(album.linkToAlbumWebsite).matches() -> Snackbar.make(it, getString(R.string.enter_valid_album_website), Snackbar.LENGTH_LONG).show()
                 }
             }
         }
@@ -119,6 +189,24 @@ class AlbumActivity : AppCompatActivity() {
             }, year, month, day)
 
             datePicker.show()
+        }
+
+        // Keep count of tracks for the tracklist segment of the album page
+        var trackCount = 0
+
+        binding.addTrackButton.setOnClickListener {
+            trackCount++
+            val trackInput = EditText(this).apply {
+                hint = getString(R.string.enter_track_name_hint, trackCount)
+                inputType = InputType.TYPE_CLASS_TEXT
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    topMargin = 8
+                }
+            }
+            binding.trackListContainer.addView(trackInput)
         }
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
