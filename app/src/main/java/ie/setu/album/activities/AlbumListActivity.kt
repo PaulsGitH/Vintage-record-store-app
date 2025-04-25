@@ -1,6 +1,7 @@
 package ie.setu.album.activities
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -114,6 +115,11 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
                 return true
             }
 
+            R.id.item_filter_genre -> {
+                filterByGenre()
+                return true
+            }
+
         }
         return super.onOptionsItemSelected(item)
     }
@@ -146,6 +152,19 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
         (binding.recyclerView.adapter as AlbumAdapter).updateList(filteredList)
     }
 
-
+    private fun filterByGenre() {
+        val genres = resources.getStringArray(R.array.album_genres)
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Choose Genre")
+        builder.setItems(genres) { _, which ->
+            val selectedGenre = genres[which]
+            val filteredList = app.albums.findAll().filter { it.albumGenre == selectedGenre }
+            (binding.recyclerView.adapter as AlbumAdapter).updateList(filteredList)
+        }
+        builder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.show()
+    }
 
 }
