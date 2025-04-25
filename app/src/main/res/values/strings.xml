@@ -62,5 +62,6 @@
     <string name="sort_by_rating_low">Sort by Rating (Lowest First)</string>
     <string name="sort_by_price_high">Sort by Price (High → Low)</string>
     <string name="sort_by_price_low">Sort by Price (Low → High)</string>
+    <string name="filter_by_genre">Filter by Genre</string>
 
 </resources>

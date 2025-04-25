@@ -40,4 +40,10 @@
         android:title="@string/sort_by_price_low"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/item_filter_genre"
+        android:title="@string/filter_by_genre"
+        app:showAsAction="never" />
+
+
 </menu>
