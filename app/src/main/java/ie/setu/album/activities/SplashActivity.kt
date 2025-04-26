@@ -21,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
         GlobalScope.launch {
             delay(2000) // 2 seconds
             withContext(Dispatchers.Main) {
-                startActivity(Intent(this@SplashActivity, AlbumListActivity::class.java))
+                startActivity(Intent(this@SplashActivity, HomeActivity::class.java))
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 finish()
             }
