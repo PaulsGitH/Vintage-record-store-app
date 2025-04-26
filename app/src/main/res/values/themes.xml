@@ -1,5 +1,12 @@
 <resources>
+
+    <style name="Widget.App.Button" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">@color/md_theme_primary</item>
+        <item name="android:textColor">@color/md_theme_onPrimary</item>
+    </style>
+
     <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:buttonStyle">@style/Widget.App.Button</item>
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
