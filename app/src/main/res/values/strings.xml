@@ -31,6 +31,9 @@
         <item>Classical</item>
         <item>Pop</item>
         <item>Hip-Hop</item>
+        <item>Punk</item>
+        <item>Goth</item>
+        <item>Electronic</item>
         <item>Country</item>
     </string-array>
 
