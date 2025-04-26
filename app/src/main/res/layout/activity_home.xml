@@ -12,7 +12,7 @@
         android:id="@+id/vinylImage"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:src="@drawable/vintage_record_store"
+        android:src="@drawable/splash_image"
         android:scaleType="centerInside"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/enterStoreButton"
