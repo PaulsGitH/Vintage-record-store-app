@@ -28,20 +28,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
 
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> true
-                R.id.nav_albums -> {
-                    startActivity(Intent(this, AlbumListActivity::class.java))
-                    true
-                }
-                R.id.nav_favorites -> {
-                    startActivity(Intent(this, FavoritesActivity::class.java))
-                    true
-                }
-                else -> false
-            }
-        }
+
     }
 }
 
