@@ -33,6 +33,7 @@ class AlbumMemStore : AlbumStore {
             foundAlbum.trackList = album.trackList
             foundAlbum.linkToAlbumWebsite = album.linkToAlbumWebsite
             foundAlbum.sampleSongYouTube = album.sampleSongYouTube
+            foundAlbum.isFavorite = album.isFavorite
             logAll()
         }
     }
@@ -53,5 +54,10 @@ class AlbumMemStore : AlbumStore {
                     it.albumGenre.contains(query, ignoreCase = true)
         }
     }
+
+    fun findFavorites(): List<AlbumModel> {
+        return albums.filter { it.isFavorite }
+    }
+
 
 }

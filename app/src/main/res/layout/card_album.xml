@@ -34,6 +34,7 @@
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 tools:text="A Title" />
 
+
             <TextView
                 android:id="@+id/AlbumDescription"
                 android:layout_width="wrap_content"
@@ -45,10 +46,23 @@
                 android:id="@+id/albumCardRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:isIndicator="true"
                 android:numStars="5"
                 android:stepSize="1.0"
-                android:isIndicator="true"
-                android:layout_marginTop="4dp" />
+                android:scaleX="0.5"
+                android:scaleY="0.5" />
+
+            <ImageView
+                android:id="@+id/favouriteIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end"
+                android:contentDescription="@string/favourite_icon"
+                android:src="@drawable/ic_favorite_border"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginTop="8dp" />
 
         </LinearLayout>
 

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import ie.setu.Album.R
 import ie.setu.Album.databinding.CardAlbumBinding
 import ie.setu.Album.models.AlbumModel
 
@@ -35,9 +36,20 @@ class AlbumAdapter constructor(private var Albums: List<AlbumModel>,
         fun bind(Album: AlbumModel, listener: AlbumListener) {
             binding.AlbumTitle.text = Album.albumName
             binding.AlbumDescription.text = Album.albumDescription
-            Picasso.get().load(Album.albumImage).resize(200,200).into(binding.imageIcon)
-            binding.root.setOnClickListener { listener.onAlbumClick(Album)}
+            Picasso.get().load(Album.albumImage).resize(200, 200).into(binding.imageIcon)
+            binding.root.setOnClickListener { listener.onAlbumClick(Album) }
             binding.albumCardRating.rating = Album.rating.toFloat()
+
+            binding.favouriteIcon.setImageResource(
+                if (Album.isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+            )
+
+            binding.favouriteIcon.setOnClickListener {
+                Album.isFavorite = !Album.isFavorite
+                binding.favouriteIcon.setImageResource(
+                    if (Album.isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+                )
+            }
         }
     }
 }
