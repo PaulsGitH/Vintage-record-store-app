@@ -35,7 +35,10 @@ class AlbumAdapter constructor(private var Albums: List<AlbumModel>,
 
         fun bind(Album: AlbumModel, listener: AlbumListener) {
             binding.AlbumTitle.text = Album.albumName
-            binding.AlbumDescription.text = Album.albumDescription
+            binding.ArtistName.text  = Album.artist
+         //   binding.AlbumDescription.text = Album.albumDescription
+            binding.GenreName.text   = Album.albumGenre
+            binding.AlbumPrice.text = "€${String.format("%.2f", Album.cost)}"
             Picasso.get().load(Album.albumImage).resize(200, 200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onAlbumClick(Album) }
             binding.albumCardRating.rating = Album.rating.toFloat()
