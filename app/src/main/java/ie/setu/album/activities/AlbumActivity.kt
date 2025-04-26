@@ -5,6 +5,8 @@ import android.content.Intent
 import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.InputType
 import android.util.Patterns
 import android.view.Menu
@@ -145,11 +147,15 @@ class AlbumActivity : AppCompatActivity() {
 
                 if (edit) {
                     app.albums.update(album.copy())
+                    Snackbar.make(binding.root, getString(R.string.album_updated_success), Snackbar.LENGTH_SHORT).show()
                 } else {
                     app.albums.create(album.copy())
+                    Snackbar.make(binding.root, getString(R.string.album_added_success), Snackbar.LENGTH_SHORT).show()
                 }
-                setResult(RESULT_OK)
-                finish()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    setResult(RESULT_OK)
+                    finish()
+                }, 500)
 
             } else {
                 when {

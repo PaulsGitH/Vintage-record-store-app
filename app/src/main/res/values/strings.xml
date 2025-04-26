@@ -31,6 +31,9 @@
         <item>Classical</item>
         <item>Pop</item>
         <item>Hip-Hop</item>
+        <item>Punk</item>
+        <item>Goth</item>
+        <item>Electronic</item>
         <item>Country</item>
     </string-array>
 
@@ -64,4 +67,11 @@
     <string name="sort_by_price_low">Sort by Price (Low → High)</string>
     <string name="filter_by_genre">Filter by Genre</string>
 
+    <string name="favourite_icon">Favourite Icon</string>
+
+    <string name="no_favourites_message">No favourite albums yet.</string>
+    <string name="enter_store">Enter Store</string>
+
+    <string name="album_added_success">Album added successfully!</string>
+    <string name="album_updated_success">Album updated successfully!</string>
 </resources>
