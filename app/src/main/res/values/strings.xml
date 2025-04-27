@@ -79,4 +79,9 @@
     <string name="hint_password">Password</string>
     <string name="button_login">Login</string>
     <string name="error_incorrect_login">Incorrect username or password</string>
+
+    <string name="visit_band_website">Visit Band Website</string>
+    <string name="track_listing">Track Listing</string>
+    <string name="edit_album">Edit Album</string>
+    <string name="euro_symbol">€%1$.2f</string>
 </resources>
