@@ -17,6 +17,7 @@ import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import ie.setu.Album.R
@@ -42,6 +43,14 @@ class AlbumActivity : AppCompatActivity() {
         binding = ActivityAlbumBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val nightModeFlags = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
+
+        if (nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
+            binding.albumRating.progressTintList = ContextCompat.getColorStateList(this, R.color.md_theme_primary)
+        } else {
+            binding.albumRating.progressTintList = ContextCompat.getColorStateList(this, R.color.md_theme_primary)
+        }
+
         binding.topAppBar.title = title
         setSupportActionBar(binding.topAppBar)
 
@@ -65,7 +74,7 @@ class AlbumActivity : AppCompatActivity() {
             binding.albumCost.setText(album.cost.toString())
             binding.albumReleaseDate.setText(album.albumReleaseDate)
             binding.albumGenre.setSelection(genres.indexOf(album.albumGenre))
-            binding.albumRating.rating = album.rating.toFloat()
+            binding.albumRating.progressTintList = ContextCompat.getColorStateList(this, R.color.md_theme_primary)
             binding.sampleSongYouTube.setText(album.sampleSongYouTube)
             binding.linkToAlbumWebsite.setText(album.linkToAlbumWebsite)
 
