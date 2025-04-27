@@ -23,8 +23,7 @@ class HomeActivity : AppCompatActivity() {
 
 
         binding.enterStoreButton.setOnClickListener {
-            val intent = Intent(this, AlbumListActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, LoginActivity::class.java))
         }
 
 

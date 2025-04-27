@@ -17,6 +17,8 @@ import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import ie.setu.Album.R
@@ -28,6 +30,9 @@ import ie.setu.album.activities.AlbumListActivity
 import ie.setu.album.activities.HomeActivity
 import ie.setu.album.activities.FavoritesActivity
 import timber.log.Timber.i
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 class AlbumActivity : AppCompatActivity() {
 
@@ -41,6 +46,14 @@ class AlbumActivity : AppCompatActivity() {
 
         binding = ActivityAlbumBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val nightModeFlags = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
+
+        if (nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
+            binding.albumRating.progressTintList = ContextCompat.getColorStateList(this, R.color.md_theme_primary)
+        } else {
+            binding.albumRating.progressTintList = ContextCompat.getColorStateList(this, R.color.md_theme_primary)
+        }
 
         binding.topAppBar.title = title
         setSupportActionBar(binding.topAppBar)
@@ -65,7 +78,7 @@ class AlbumActivity : AppCompatActivity() {
             binding.albumCost.setText(album.cost.toString())
             binding.albumReleaseDate.setText(album.albumReleaseDate)
             binding.albumGenre.setSelection(genres.indexOf(album.albumGenre))
-            binding.albumRating.rating = album.rating.toFloat()
+            binding.albumRating.progressTintList = ContextCompat.getColorStateList(this, R.color.md_theme_primary)
             binding.sampleSongYouTube.setText(album.sampleSongYouTube)
             binding.linkToAlbumWebsite.setText(album.linkToAlbumWebsite)
 
@@ -86,26 +99,18 @@ class AlbumActivity : AppCompatActivity() {
                 }
             }
 
-            binding.playYouTubeButton.setOnClickListener {
-                val youtubeUrl = binding.sampleSongYouTube.text.toString().trim()
-                if (youtubeUrl.isNotEmpty()) {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl))
-                    startActivity(intent)
-                } else {
-                    Snackbar.make(it, getString(R.string.invalid_youtube_url), Snackbar.LENGTH_LONG).show()
-                }
-            }
+            val youtubePlayerView = findViewById<YouTubePlayerView>(R.id.youtube_player_view)
 
-            binding.openWebsiteButton.setOnClickListener {
-                val url = album.linkToAlbumWebsite.trim()
-                if (Patterns.WEB_URL.matcher(url).matches()) {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                    startActivity(intent)
-                } else {
-                    Snackbar.make(it, getString(R.string.enter_valid_album_website), Snackbar.LENGTH_LONG).show()
-                }
-            }
+            lifecycle.addObserver(youtubePlayerView)
 
+            youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                override fun onReady(youTubePlayer: YouTubePlayer) {
+                    val videoId = extractVideoId(album.sampleSongYouTube)
+                    if (videoId != null) {
+                        youTubePlayer.loadVideo(videoId, 0f)
+                    }
+                }
+            })
 
         }
 
@@ -258,16 +263,22 @@ class AlbumActivity : AppCompatActivity() {
     private fun registerImagePickerCallback() {
         imageIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == RESULT_OK && result.data != null) {
-                    i("Got Result ${result.data!!.data}")
-                    album.albumImage = result.data!!.data!!
+                val dataUri = result.data?.data
+                if (result.resultCode == RESULT_OK && dataUri != null) {
+                    contentResolver.takePersistableUriPermission(
+                        dataUri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                    )
+                    album.albumImage = dataUri
                     Picasso.get()
                         .load(album.albumImage)
                         .resize(800, 600)
+                        .centerCrop()
                         .into(binding.albumImage)
                     binding.chooseImage.setText(R.string.change_album_image)
                 }
             }
+
 
         if (intent.hasExtra("album_edit")) {
             Picasso.get()
@@ -279,4 +290,11 @@ class AlbumActivity : AppCompatActivity() {
             }
         }
     }
+
+    fun extractVideoId(url: String): String? {
+        val regex = "(?<=v=|be/|embed/)[^&#]+".toRegex()
+        return regex.find(url)?.value
+    }
+
+
 }

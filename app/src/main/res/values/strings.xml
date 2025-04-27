@@ -39,8 +39,8 @@
 
     <string name="nav_home">Home</string>
     <string name="nav_albums">Albums</string>
-    <string name="nav_favorites">Favorites</string>
-    <string name="menu_favorites">Favorites</string>
+    <string name="nav_favorites">Wishlist</string>
+    <string name="menu_favorites">Wishlist</string>
     <string name="title_home">Home</string>
 
     <string name="track_list_label">Track Listing</string>
@@ -69,9 +69,20 @@
 
     <string name="favourite_icon">Favourite Icon</string>
 
-    <string name="no_favourites_message">No favourite albums yet.</string>
+    <string name="no_favourites_message">No Wish listed albums yet.</string>
     <string name="enter_store">Enter Store</string>
 
     <string name="album_added_success">Album added successfully!</string>
     <string name="album_updated_success">Album updated successfully!</string>
+
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="button_login">Login</string>
+    <string name="error_incorrect_login">Incorrect username or password</string>
+
+    <string name="visit_band_website">Visit Band Website</string>
+    <string name="track_listing">Track Listing</string>
+    <string name="edit_album">Edit Album</string>
+    <string name="euro_symbol">€%1$.2f</string>
+    <string name="album_cover">Album Cover</string>
 </resources>

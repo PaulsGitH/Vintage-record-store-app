@@ -102,7 +102,17 @@
                     android:stepSize="1.0"
                     android:rating="1"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:textColor="@android:color/white"/>
+
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/youtube_player_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="16dp"
+                    app:autoPlay="false" />
+
 
                 <Button
                     android:id="@+id/chooseImage"
@@ -111,7 +121,8 @@
                     android:layout_margin="16dp"
                     android:paddingBottom="8dp"
                     android:paddingTop="8dp"
-                    android:backgroundTint="?attr/colorSecondary"
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:textColor="@android:color/white"
                     android:text="@string/button_addImage"/>
 
                 <ImageView
@@ -142,7 +153,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="@string/add_track_button"
-                    android:backgroundTint="?attr/colorSecondary"/>
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:textColor="@android:color/white"/>
 
                 <EditText
                     android:id="@+id/sampleSongYouTube"
@@ -152,13 +164,6 @@
                     android:inputType="textUri"
                     android:layout_marginTop="16dp" />
 
-                <Button
-                    android:id="@+id/playYouTubeButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/play_sample_song"
-                    android:layout_marginTop="16dp"
-                    android:backgroundTint="?attr/colorSecondary"/>
 
                 <EditText
                     android:id="@+id/linkToAlbumWebsite"
@@ -168,22 +173,14 @@
                     android:inputType="textUri"
                     android:layout_marginTop="16dp" />
 
-                <Button
-                    android:id="@+id/openWebsiteButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/button_open_website"
-                    android:backgroundTint="?attr/colorSecondary"/>
 
                 <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:backgroundTint="?attr/colorSecondary"
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:textColor="@android:color/white"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="@string/button_addAlbum" />
