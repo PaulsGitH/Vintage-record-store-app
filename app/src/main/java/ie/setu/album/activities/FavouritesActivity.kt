@@ -62,6 +62,8 @@ class FavoritesActivity : AppCompatActivity(), AlbumListener {
     }
 
     override fun onAlbumClick(album: AlbumModel) {
-        loadFavorites()
+        val viewIntent = Intent(this, ViewAlbumActivity::class.java)
+        viewIntent.putExtra("album_view", album)
+        startActivity(viewIntent)
     }
 }

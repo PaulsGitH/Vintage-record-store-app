@@ -1,6 +1,7 @@
 package ie.setu.album.activities
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
@@ -47,15 +48,22 @@ class ViewAlbumActivity : AppCompatActivity() {
         val visitBandWebsite = findViewById<TextView>(R.id.visitBandWebsite)
         val trackListContainer = findViewById<LinearLayout>(R.id.trackListContainer)
         val youtubePlayerView = findViewById<YouTubePlayerView>(R.id.youtubePlayerView)
+        val trackListLabel = findViewById<TextView>(R.id.trackListLabel)
 
         // Set album details
         albumName.text = album.albumName
+        albumName.setTypeface(null, Typeface.BOLD)
         albumArtist.text = album.artist
+        albumArtist.setTypeface(null, Typeface.BOLD)
         albumDescription.text = album.albumDescription
         albumGenre.text = album.albumGenre
+        albumGenre.setTypeface(null, Typeface.BOLD)
         albumReleaseDate.text = album.albumReleaseDate
+        albumReleaseDate.setTypeface(null, Typeface.BOLD)
         albumCost.text = getString(R.string.euro_symbol, album.cost)
+        albumCost.setTypeface(null, Typeface.BOLD)
         albumRating.rating = album.rating.toFloat()
+        trackListLabel.setTypeface(null, Typeface.BOLD)
 
 
         try {
@@ -75,7 +83,6 @@ class ViewAlbumActivity : AppCompatActivity() {
         }
 
 
-        // Set website link
         visitBandWebsite.setOnClickListener {
             val url = album.linkToAlbumWebsite.trim()
             if (url.startsWith("http://") || url.startsWith("https://")) {
@@ -86,8 +93,7 @@ class ViewAlbumActivity : AppCompatActivity() {
             }
         }
 
-        // Load track list nicely
-        for ((key, value) in album.trackList.toSortedMap()) {
+        for ((key, value) in album.trackList.toSortedMap(compareBy { it.substringAfter("Track ").toIntOrNull() ?: 0 })) {
             val trackTextView = TextView(this).apply {
                 text = "$key: $value"
                 textSize = 16f

@@ -99,11 +99,13 @@
             android:numStars="5"
             android:stepSize="1.0"
             android:isIndicator="true"
+            android:scaleX="0.4"
+            android:scaleY="0.4"
+            android:theme="@style/RatingBarTheme"
             app:layout_constraintStart_toEndOf="@id/imageIcon"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/GenreName"
-            android:scaleX="0.4"
-            android:scaleY="0.4" />
+            app:layout_constraintTop_toBottomOf="@id/GenreName" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

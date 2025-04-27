@@ -1,7 +1,9 @@
 package ie.setu.Album.adapters
 
+import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ie.setu.Album.R
@@ -36,12 +38,13 @@ class AlbumAdapter constructor(private var Albums: List<AlbumModel>,
         fun bind(Album: AlbumModel, listener: AlbumListener) {
             binding.AlbumTitle.text = Album.albumName
             binding.ArtistName.text  = Album.artist
-         //   binding.AlbumDescription.text = Album.albumDescription
+         // binding.AlbumDescription.text = Album.albumDescription
             binding.GenreName.text   = Album.albumGenre
             binding.AlbumPrice.text = "€${String.format("%.2f", Album.cost)}"
             Picasso.get().load(Album.albumImage).resize(200, 200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onAlbumClick(Album) }
             binding.albumCardRating.rating = Album.rating.toFloat()
+
 
             binding.favouriteIcon.setImageResource(
                 if (Album.isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border

@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.ContextThemeWrapper
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.SearchView
@@ -154,7 +155,7 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
 
     private fun filterByGenre() {
         val genres = resources.getStringArray(R.array.album_genres)
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.DialogTheme))
         builder.setTitle("Choose Genre")
         builder.setItems(genres) { _, which ->
             val selectedGenre = genres[which]

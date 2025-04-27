@@ -5,4 +5,6 @@ interface AlbumStore {
     fun create(album: AlbumModel)
     fun update(album: AlbumModel)
     fun delete(album: AlbumModel)
+    fun searchAll(query: String): List<AlbumModel>
+    fun findFavorites(): List<AlbumModel>
 }

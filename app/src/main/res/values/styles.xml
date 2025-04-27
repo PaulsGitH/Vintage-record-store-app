@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="PopupMenuTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="popupMenuStyle">@style/Widget.App.PopupMenu</item>
+    </style>
+
+    <style name="Widget.App.PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@color/popup_bg</item>
+        <item name="android:itemTextAppearance">@style/TextAppearance.App.PopupMenuItem</item>
+    </style>
+
+    <style name="TextAppearance.App.PopupMenuItem" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/popup_text</item>
+    </style>
+</resources>
