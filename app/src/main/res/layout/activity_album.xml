@@ -106,6 +106,14 @@
                     android:backgroundTint="?attr/colorPrimary"
                     android:textColor="@android:color/white"/>
 
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/youtube_player_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="16dp"
+                    app:autoPlay="false" />
+
+
                 <Button
                     android:id="@+id/chooseImage"
                     android:layout_width="match_parent"
@@ -156,16 +164,6 @@
                     android:inputType="textUri"
                     android:layout_marginTop="16dp" />
 
-                <Button
-                    android:id="@+id/playYouTubeButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/play_sample_song"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:backgroundTint="?attr/colorPrimary"
-                    android:textColor="@android:color/white" />
 
                 <EditText
                     android:id="@+id/linkToAlbumWebsite"

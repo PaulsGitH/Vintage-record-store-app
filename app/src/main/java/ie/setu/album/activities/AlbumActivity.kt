@@ -18,6 +18,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import ie.setu.Album.R
@@ -29,6 +30,9 @@ import ie.setu.album.activities.AlbumListActivity
 import ie.setu.album.activities.HomeActivity
 import ie.setu.album.activities.FavoritesActivity
 import timber.log.Timber.i
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 class AlbumActivity : AppCompatActivity() {
 
@@ -95,15 +99,18 @@ class AlbumActivity : AppCompatActivity() {
                 }
             }
 
-            binding.playYouTubeButton.setOnClickListener {
-                val youtubeUrl = binding.sampleSongYouTube.text.toString().trim()
-                if (youtubeUrl.isNotEmpty()) {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl))
-                    startActivity(intent)
-                } else {
-                    Snackbar.make(it, getString(R.string.invalid_youtube_url), Snackbar.LENGTH_LONG).show()
+            val youtubePlayerView = findViewById<YouTubePlayerView>(R.id.youtube_player_view)
+
+            lifecycle.addObserver(youtubePlayerView)
+
+            youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                override fun onReady(youTubePlayer: YouTubePlayer) {
+                    val videoId = extractVideoId(album.sampleSongYouTube)
+                    if (videoId != null) {
+                        youTubePlayer.loadVideo(videoId, 0f)
+                    }
                 }
-            }
+            })
 
             binding.openWebsiteButton.setOnClickListener {
                 val url = album.linkToAlbumWebsite.trim()
@@ -288,4 +295,11 @@ class AlbumActivity : AppCompatActivity() {
             }
         }
     }
+
+    fun extractVideoId(url: String): String? {
+        val regex = "(?<=v=|be/|embed/)[^&#]+".toRegex()
+        return regex.find(url)?.value
+    }
+
+
 }
