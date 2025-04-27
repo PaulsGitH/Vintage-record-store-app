@@ -25,14 +25,23 @@
                 android:layout_height="wrap_content"
                 android:minHeight="?attr/actionBarSize"
                 app:titleTextColor="?attr/colorOnPrimary"
-                app:menu="@menu/menu_view_album"/>
-
+                app:menu="@menu/menu_view_album" />
         </com.google.android.material.appbar.AppBarLayout>
 
+        <!-- Album Cover directly below AppBar -->
+        <ImageView
+            android:id="@+id/albumCoverImage"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_below="@id/appBarLayout"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/album_cover" />
+
+        <!-- Scrollable details below Album Cover -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/appBarLayout"
+            android:layout_below="@id/albumCoverImage"
             android:fillViewport="true">
 
             <LinearLayout
@@ -40,13 +49,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp">
-
-                <ImageView
-                    android:id="@+id/albumCoverImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="Album Cover"/>
 
                 <TextView
                     android:id="@+id/viewAlbumName"
@@ -105,9 +107,9 @@
                     android:id="@+id/trackListLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/track_listing"
+                    android:text="@string/track_list_label"
                     android:textSize="18sp"
-                    android:layout_marginTop="16dp" />
+                    android:layout_marginTop="16dp"/>
 
                 <LinearLayout
                     android:id="@+id/trackListContainer"
@@ -130,10 +132,9 @@
                     android:text="@string/visit_band_website"
                     android:textColor="@android:color/holo_blue_dark"
                     android:textSize="16sp"
-                    android:layout_marginTop="16dp" />
+                    android:layout_marginTop="16dp"/>
 
             </LinearLayout>
-
         </ScrollView>
 
     </RelativeLayout>

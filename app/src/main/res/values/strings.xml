@@ -84,4 +84,5 @@
     <string name="track_listing">Track Listing</string>
     <string name="edit_album">Edit Album</string>
     <string name="euro_symbol">€%1$.2f</string>
+    <string name="album_cover">Album Cover</string>
 </resources>

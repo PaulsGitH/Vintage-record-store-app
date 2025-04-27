@@ -138,9 +138,9 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
         }
 
     override fun onAlbumClick(album: AlbumModel) {
-        val launcherIntent = Intent(this, AlbumActivity::class.java)
-        launcherIntent.putExtra("album_edit", album)
-        getResult.launch(launcherIntent)
+        val viewIntent = Intent(this, ViewAlbumActivity::class.java)
+        viewIntent.putExtra("album_view", album)
+        startActivity(viewIntent)
     }
 
     fun showAlbums(albums: List<AlbumModel>) {

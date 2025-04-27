@@ -112,17 +112,6 @@ class AlbumActivity : AppCompatActivity() {
                 }
             })
 
-            binding.openWebsiteButton.setOnClickListener {
-                val url = album.linkToAlbumWebsite.trim()
-                if (Patterns.WEB_URL.matcher(url).matches()) {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                    startActivity(intent)
-                } else {
-                    Snackbar.make(it, getString(R.string.enter_valid_album_website), Snackbar.LENGTH_LONG).show()
-                }
-            }
-
-
         }
 
         binding.btnAdd.setOnClickListener {
@@ -274,16 +263,22 @@ class AlbumActivity : AppCompatActivity() {
     private fun registerImagePickerCallback() {
         imageIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == RESULT_OK && result.data != null) {
-                    i("Got Result ${result.data!!.data}")
-                    album.albumImage = result.data!!.data!!
+                val dataUri = result.data?.data
+                if (result.resultCode == RESULT_OK && dataUri != null) {
+                    contentResolver.takePersistableUriPermission(
+                        dataUri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                    )
+                    album.albumImage = dataUri
                     Picasso.get()
                         .load(album.albumImage)
                         .resize(800, 600)
+                        .centerCrop()
                         .into(binding.albumImage)
                     binding.chooseImage.setText(R.string.change_album_image)
                 }
             }
+
 
         if (intent.hasExtra("album_edit")) {
             Picasso.get()

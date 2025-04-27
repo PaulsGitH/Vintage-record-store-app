@@ -43,5 +43,8 @@
         <activity android:name="ie.setu.album.activities.LoginActivity"
             android:exported="true"/>
 
+        <activity android:name="ie.setu.album.activities.ViewAlbumActivity"
+            android:exported="true"/>
+
     </application>
 </manifest>
