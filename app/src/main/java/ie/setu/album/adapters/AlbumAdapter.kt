@@ -1,14 +1,13 @@
-package ie.setu.Album.adapters
+package ie.setu.album.adapters
 
-import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import ie.setu.Album.R
-import ie.setu.Album.databinding.CardAlbumBinding
-import ie.setu.Album.models.AlbumModel
+import ie.setu.album.R
+import ie.setu.album.databinding.CardAlbumBinding
+import ie.setu.album.main.MainApp
+import ie.setu.album.models.AlbumModel
 
 class AlbumAdapter constructor(private var Albums: List<AlbumModel>,
                                    private val listener: AlbumListener) :
@@ -51,10 +50,14 @@ class AlbumAdapter constructor(private var Albums: List<AlbumModel>,
             )
 
             binding.favouriteIcon.setOnClickListener {
-                Album.isFavorite = !Album.isFavorite
+                val newState = !Album.isFavorite
+                Album.isFavorite = newState
                 binding.favouriteIcon.setImageResource(
-                    if (Album.isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+                    if (newState) R.drawable.ic_favorite else R.drawable.ic_favorite_border
                 )
+                (binding.root.context.applicationContext as MainApp)
+                    .albums
+                    .update(Album)
             }
         }
     }

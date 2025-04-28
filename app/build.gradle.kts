@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "ie.setu.Album"
+    namespace = "ie.setu.album"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "ie.setu.Album"
+        applicationId = "ie.setu.album"
         minSdk = 30
         targetSdk = 35
         versionCode = 1
@@ -76,4 +76,7 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
 }

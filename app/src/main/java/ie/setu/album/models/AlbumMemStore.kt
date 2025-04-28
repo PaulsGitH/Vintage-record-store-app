@@ -1,4 +1,4 @@
-package ie.setu.Album.models
+package ie.setu.album.models
 
 import timber.log.Timber.i
 

@@ -1,8 +1,8 @@
-package ie.setu.Album.helpers
+package ie.setu.album.helpers
 
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
-import ie.setu.Album.R
+import ie.setu.album.R
 
 fun showImagePicker(intentLauncher: ActivityResultLauncher<Intent>) {
     val pickIntent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {

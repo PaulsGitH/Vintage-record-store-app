@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import ie.setu.Album.R
-import ie.setu.Album.adapters.AlbumAdapter
-import ie.setu.Album.adapters.AlbumListener
-import ie.setu.Album.databinding.ActivityFavoritesBinding
-import ie.setu.Album.main.MainApp
-import ie.setu.Album.models.AlbumModel
+import ie.setu.album.R
+import ie.setu.album.adapters.AlbumAdapter
+import ie.setu.album.adapters.AlbumListener
+import ie.setu.album.databinding.ActivityFavoritesBinding
+import ie.setu.album.main.MainApp
+import ie.setu.album.models.AlbumModel
 
 class FavoritesActivity : AppCompatActivity(), AlbumListener {
 
@@ -66,4 +66,10 @@ class FavoritesActivity : AppCompatActivity(), AlbumListener {
         viewIntent.putExtra("album_view", album)
         startActivity(viewIntent)
     }
+
+    override fun onResume() {
+        super.onResume()
+        loadFavorites()
+    }
 }
+

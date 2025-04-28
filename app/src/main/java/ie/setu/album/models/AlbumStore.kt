@@ -1,4 +1,4 @@
-package ie.setu.Album.models
+package ie.setu.album.models
 
 interface AlbumStore {
     fun findAll(): List<AlbumModel>

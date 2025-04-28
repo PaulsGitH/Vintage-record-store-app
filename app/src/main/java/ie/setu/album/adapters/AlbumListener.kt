@@ -1,6 +1,6 @@
-package ie.setu.Album.adapters
+package ie.setu.album.adapters
 
-import ie.setu.Album.models.AlbumModel
+import ie.setu.album.models.AlbumModel
 
 interface AlbumListener {
     fun onAlbumClick(Album: AlbumModel)

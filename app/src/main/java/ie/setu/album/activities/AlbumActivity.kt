@@ -1,4 +1,4 @@
-package ie.setu.Album.activities
+package ie.setu.album.activities
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -21,11 +21,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
-import ie.setu.Album.R
-import ie.setu.Album.databinding.ActivityAlbumBinding
-import ie.setu.Album.helpers.showImagePicker
-import ie.setu.Album.main.MainApp
-import ie.setu.Album.models.AlbumModel
+import ie.setu.album.R
+import ie.setu.album.databinding.ActivityAlbumBinding
+import ie.setu.album.helpers.showImagePicker
+import ie.setu.album.main.MainApp
+import ie.setu.album.models.AlbumModel
 import ie.setu.album.activities.AlbumListActivity
 import ie.setu.album.activities.HomeActivity
 import ie.setu.album.activities.FavoritesActivity
@@ -152,15 +152,16 @@ class AlbumActivity : AppCompatActivity() {
 
                 if (edit) {
                     app.albums.update(album.copy())
-                    Snackbar.make(binding.root, getString(R.string.album_updated_success), Snackbar.LENGTH_SHORT).show()
+                    setResult(RESULT_OK)
+                    finish()
                 } else {
                     app.albums.create(album.copy())
                     Snackbar.make(binding.root, getString(R.string.album_added_success), Snackbar.LENGTH_SHORT).show()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        setResult(RESULT_OK)
+                        finish()
+                    }, 500)
                 }
-                Handler(Looper.getMainLooper()).postDelayed({
-                    setResult(RESULT_OK)
-                    finish()
-                }, 500)
 
             } else {
                 when {

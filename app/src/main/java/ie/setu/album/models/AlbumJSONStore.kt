@@ -4,8 +4,6 @@ import android.content.Context
 import android.net.Uri
 import com.google.gson.*
 import com.google.gson.reflect.TypeToken
-import ie.setu.Album.models.AlbumModel
-import ie.setu.Album.models.AlbumStore
 import ie.setu.album.helpers.*
 import timber.log.Timber
 import java.lang.reflect.Type

@@ -16,9 +16,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.squareup.picasso.Picasso
-import ie.setu.Album.R
-import ie.setu.Album.activities.AlbumActivity
-import ie.setu.Album.models.AlbumModel
+import ie.setu.album.R
+import ie.setu.album.models.AlbumModel
 
 class ViewAlbumActivity : AppCompatActivity() {
 
@@ -131,9 +130,16 @@ class ViewAlbumActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.item_edit_album -> {
-                val intent = Intent(this, AlbumActivity::class.java)
-                intent.putExtra("album_edit", album)
+                val launcherIntent = Intent(this, AlbumActivity::class.java)
+                launcherIntent.putExtra("album_edit", album)
+                startActivity(launcherIntent)
+                true
+            }
+            R.id.item_album_list -> {
+                val intent = Intent(this, AlbumListActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(intent)
+                finish()
                 true
             }
             else -> super.onOptionsItemSelected(item)

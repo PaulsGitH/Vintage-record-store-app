@@ -1,14 +1,14 @@
 package ie.setu.album.models
 
 import androidx.room.*
+import ie.setu.album.models.AlbumEntity
 
 @Dao
 interface AlbumDao {
-
     @Query("SELECT * FROM albums")
     fun findAll(): List<AlbumEntity>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(album: AlbumEntity)
 
     @Update
@@ -19,4 +19,7 @@ interface AlbumDao {
 
     @Query("SELECT * FROM albums WHERE isFavorite = 1")
     fun findFavorites(): List<AlbumEntity>
+
+    @Query("SELECT * FROM albums WHERE albumName LIKE '%' || :query || '%' OR artist LIKE '%' || :query || '%' OR albumGenre LIKE '%' || :query || '%'")
+    fun searchAll(query: String): List<AlbumEntity>
 }

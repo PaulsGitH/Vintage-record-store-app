@@ -12,13 +12,13 @@ import androidx.appcompat.widget.SearchView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import ie.setu.Album.R
-import ie.setu.Album.activities.AlbumActivity
-import ie.setu.Album.adapters.AlbumAdapter
-import ie.setu.Album.adapters.AlbumListener
-import ie.setu.Album.databinding.ActivityAlbumListBinding
-import ie.setu.Album.main.MainApp
-import ie.setu.Album.models.AlbumModel
+import ie.setu.album.R
+import ie.setu.album.activities.AlbumActivity
+import ie.setu.album.adapters.AlbumAdapter
+import ie.setu.album.adapters.AlbumListener
+import ie.setu.album.databinding.ActivityAlbumListBinding
+import ie.setu.album.main.MainApp
+import ie.setu.album.models.AlbumModel
 
 class AlbumListActivity : AppCompatActivity(), AlbumListener {
 
@@ -54,7 +54,6 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
                 else -> false
             }
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

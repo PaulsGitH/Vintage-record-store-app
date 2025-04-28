@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import ie.setu.Album.R
-import ie.setu.Album.databinding.ActivityHomeBinding
+import ie.setu.album.R
+import ie.setu.album.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
 
