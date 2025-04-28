@@ -13,6 +13,7 @@ timber = "4.7.1"
 timberkt = "1.5.1"
 picasso = "2.71828"
 gson = "2.10.1"
+room = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,6 +29,9 @@ timberkt = { module = "com.github.ajalt:timberkt", version.ref = "timberkt" }
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 youtube-player = { group = "com.pierfrancescosoffritti.androidyoutubeplayer", name = "core", version = "12.1.0" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

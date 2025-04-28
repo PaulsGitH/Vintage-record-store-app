@@ -4,6 +4,7 @@ plugins {
     id("kotlin-parcelize")
     id("org.jetbrains.dokka") version "1.8.10"
     id("org.jlleitschuh.gradle.ktlint") version "11.3.2"
+    id("kotlin-kapt")
 }
 
 android {
@@ -72,4 +73,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
 }
