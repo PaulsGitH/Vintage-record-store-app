@@ -24,13 +24,9 @@ class MainApp : Application() {
         i("Album started")
         //albums = AlbumMemStore()
         //albums = AlbumJSONStore(applicationContext)
-        //albums = AlbumRoomStore(applicationContext)
-        albums = FirebaseAlbumStore()
+        albums = AlbumRoomStore(applicationContext)
+        //albums = FirebaseAlbumStore()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         FirebaseApp.initializeApp(this)
-        //offline caching
-        //Firebase.firestore.firestoreSettings = firestoreSettings {
-         //   isPersistenceEnabled = true
-        //}
     }
 }

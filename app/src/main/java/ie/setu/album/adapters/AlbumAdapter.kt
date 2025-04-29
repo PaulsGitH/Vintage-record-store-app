@@ -9,13 +9,17 @@ import ie.setu.album.databinding.CardAlbumBinding
 import ie.setu.album.main.MainApp
 import ie.setu.album.models.AlbumModel
 
-class AlbumAdapter constructor(private var Albums: List<AlbumModel>,
-                                   private val listener: AlbumListener) :
-    RecyclerView.Adapter<AlbumAdapter.MainHolder>() {
+class AlbumAdapter(
+    albums: List<AlbumModel>,
+    private val listener: AlbumListener
+) : RecyclerView.Adapter<AlbumAdapter.MainHolder>() {
+
+    private val Albums = albums.toMutableList()
 
     fun updateList(newList: List<AlbumModel>) {
-        Albums = newList
-        notifyDataSetChanged() //allows refresh to display all albums as added
+        Albums.clear()
+        Albums.addAll(newList)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -25,39 +29,42 @@ class AlbumAdapter constructor(private var Albums: List<AlbumModel>,
     }
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
-        val Album = Albums[holder.adapterPosition]
-        holder.bind(Album, listener)
+        val album = Albums[holder.adapterPosition]
+        holder.bind(album, listener)
     }
 
     override fun getItemCount(): Int = Albums.size
 
-    class MainHolder(private val binding : CardAlbumBinding) :
+    class MainHolder(private val binding: CardAlbumBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(Album: AlbumModel, listener: AlbumListener) {
-            binding.AlbumTitle.text = Album.albumName
-            binding.ArtistName.text  = Album.artist
-         // binding.AlbumDescription.text = Album.albumDescription
-            binding.GenreName.text   = Album.albumGenre
-            binding.AlbumPrice.text = "€${String.format("%.2f", Album.cost)}"
-            Picasso.get().load(Album.albumImage).resize(200, 200).into(binding.imageIcon)
-            binding.root.setOnClickListener { listener.onAlbumClick(Album) }
-            binding.albumCardRating.rating = Album.rating.toFloat()
+        fun bind(album: AlbumModel, listener: AlbumListener) {
+            binding.AlbumTitle.text     = album.albumName
+            binding.ArtistName.text     = album.artist
+            binding.GenreName.text      = album.albumGenre
+            binding.AlbumPrice.text     = "€${"%.2f".format(album.cost)}"
+            binding.albumCardRating.rating = album.rating.toFloat()
+            Picasso.get()
+                .load(album.albumImage)
+                .resize(200, 200)
+                .into(binding.imageIcon)
 
+            binding.root.setOnClickListener { listener.onAlbumClick(album) }
 
             binding.favouriteIcon.setImageResource(
-                if (Album.isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+                if (album.isFavorite) R.drawable.ic_favorite
+                else R.drawable.ic_favorite_border
             )
-
             binding.favouriteIcon.setOnClickListener {
-                val newState = !Album.isFavorite
-                Album.isFavorite = newState
+                val newState = !album.isFavorite
+                album.isFavorite = newState
                 binding.favouriteIcon.setImageResource(
-                    if (newState) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+                    if (newState) R.drawable.ic_favorite
+                    else R.drawable.ic_favorite_border
                 )
                 (binding.root.context.applicationContext as MainApp)
                     .albums
-                    .update(Album)
+                    .update(album)
             }
         }
     }

@@ -33,5 +33,6 @@ data class AlbumModel(var albumId: Long = 0,
                       var trackList: MutableMap<String, String> = mutableMapOf(),
                       var linkToAlbumWebsite: String = "",
                       var sampleSongYouTube: String = "",
-                      var isFavorite: Boolean = false
+                      var isFavorite: Boolean = false,
+                      var firebaseId: String = ""
 ) : Parcelable

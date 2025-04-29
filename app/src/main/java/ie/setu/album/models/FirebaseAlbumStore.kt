@@ -7,26 +7,26 @@ import com.google.firebase.ktx.Firebase
 import com.google.android.gms.tasks.Tasks
 
 class FirebaseAlbumStore : AlbumStore {
-    private val db = Firebase.firestore
+    private val db  = Firebase.firestore
     private val col = db.collection("albums")
 
     override fun findAll(): List<AlbumModel> {
-
         val snapshot = Tasks.await(col.get())
         return snapshot.documents.map { it.toModel() }
     }
 
     override fun create(album: AlbumModel) {
-        val docId = if (album.albumId != 0L) album.albumId.toString() else col.document().id
+        val docId = album.firebaseId.ifEmpty { col.document().id }
+        album.firebaseId = docId           // remember it for next time
         col.document(docId).set(album.toMap())
     }
 
     override fun update(album: AlbumModel) {
-        col.document(album.albumId.toString()).set(album.toMap())
+        col.document(album.firebaseId).set(album.toMap())
     }
 
     override fun delete(album: AlbumModel) {
-        col.document(album.albumId.toString()).delete()
+        col.document(album.firebaseId).delete()
     }
 
     override fun searchAll(query: String): List<AlbumModel> =
@@ -41,18 +41,19 @@ class FirebaseAlbumStore : AlbumStore {
 
     private fun DocumentSnapshot.toModel() = AlbumModel(
         albumId            = id.toLongOrNull() ?: 0L,
-        albumName          = getString("albumName") ?: "",
-        albumDescription   = getString("albumDescription") ?: "",
+        albumName          = getString("albumName")          ?: "",
+        albumDescription   = getString("albumDescription")   ?: "",
         albumImage         = Uri.parse(getString("albumImage") ?: ""),
-        albumReleaseDate   = getString("albumReleaseDate") ?: "",
-        albumGenre         = getString("albumGenre") ?: "",
-        artist             = getString("artist") ?: "",
-        rating             = getLong("rating")?.toInt() ?: 0,
-        cost               = getDouble("cost") ?: 0.0,
-        trackList = (get("trackList") as? Map<String, String>)?.toMutableMap() ?: mutableMapOf(),
+        albumReleaseDate   = getString("albumReleaseDate")   ?: "",
+        albumGenre         = getString("albumGenre")         ?: "",
+        artist             = getString("artist")             ?: "",
+        rating             = getLong("rating")?.toInt()      ?: 0,
+        cost               = getDouble("cost")               ?: 0.0,
+        trackList          = (get("trackList") as? Map<String, String>)?.toMutableMap() ?: mutableMapOf(),
         linkToAlbumWebsite = getString("linkToAlbumWebsite") ?: "",
-        sampleSongYouTube  = getString("sampleSongYouTube") ?: "",
-        isFavorite         = getBoolean("isFavorite") ?: false
+        sampleSongYouTube  = getString("sampleSongYouTube")  ?: "",
+        isFavorite         = getBoolean("isFavorite")        ?: false,
+        firebaseId         = id
     )
 
     private fun AlbumModel.toMap() = mapOf(
