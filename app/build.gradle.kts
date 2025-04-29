@@ -5,6 +5,7 @@ plugins {
     id("org.jetbrains.dokka") version "1.8.10"
     id("org.jlleitschuh.gradle.ktlint") version "11.3.2"
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -70,6 +71,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation (libs.timberkt)
     implementation (libs.picasso)
+    implementation(libs.firebase.firestore.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -79,4 +81,7 @@ dependencies {
     implementation("androidx.room:room-runtime:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
+    implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
+    implementation("com.google.firebase:firebase-analytics")
+
 }
