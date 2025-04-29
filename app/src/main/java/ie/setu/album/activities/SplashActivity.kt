@@ -3,8 +3,8 @@ package ie.setu.album.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import ie.setu.Album.main.MainApp
-import ie.setu.Album.R
+import ie.setu.album.main.MainApp
+import ie.setu.album.R
 import kotlinx.coroutines.*
 
 class SplashActivity : AppCompatActivity() {

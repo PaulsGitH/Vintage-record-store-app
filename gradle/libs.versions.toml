@@ -1,6 +1,6 @@
 [versions]
 agp = "8.8.0"
-kotlin = "1.9.24"
+kotlin = "2.1.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -12,6 +12,9 @@ constraintlayout = "2.2.0"
 timber = "4.7.1"
 timberkt = "1.5.1"
 picasso = "2.71828"
+gson = "2.10.1"
+room = "2.6.1"
+firebaseFirestoreKtx = "25.1.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -26,6 +29,11 @@ timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 timberkt = { module = "com.github.ajalt:timberkt", version.ref = "timberkt" }
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 youtube-player = { group = "com.pierfrancescosoffritti.androidyoutubeplayer", name = "core", version = "12.1.0" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

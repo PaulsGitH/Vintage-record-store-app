@@ -5,19 +5,24 @@ import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.ContextThemeWrapper
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.SearchView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import ie.setu.Album.R
-import ie.setu.Album.activities.AlbumActivity
-import ie.setu.Album.adapters.AlbumAdapter
-import ie.setu.Album.adapters.AlbumListener
-import ie.setu.Album.databinding.ActivityAlbumListBinding
-import ie.setu.Album.main.MainApp
-import ie.setu.Album.models.AlbumModel
+import ie.setu.album.R
+import ie.setu.album.activities.AlbumActivity
+import ie.setu.album.adapters.AlbumAdapter
+import ie.setu.album.adapters.AlbumListener
+import ie.setu.album.databinding.ActivityAlbumListBinding
+import ie.setu.album.main.MainApp
+import ie.setu.album.models.AlbumModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AlbumListActivity : AppCompatActivity(), AlbumListener {
 
@@ -32,10 +37,6 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
         setSupportActionBar(binding.topAppBar)
 
         app = application as MainApp
-
-        val layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = AlbumAdapter(app.albums.findAll(), this)
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -54,7 +55,15 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
             }
         }
 
+        lifecycleScope.launch {
+            val albums = withContext(Dispatchers.IO) {
+                (application as MainApp).albums.findAll()
+            }
+            binding.recyclerView.layoutManager = LinearLayoutManager(this@AlbumListActivity)
+            binding.recyclerView.adapter = AlbumAdapter(albums, this@AlbumListActivity)
+        }
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -128,12 +137,19 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
-            if (it.resultCode == Activity.RESULT_OK) {
-                val updatedList = app.albums.findAll()
-                (binding.recyclerView.adapter as AlbumAdapter).updateList(updatedList)
-            }
-            if (it.resultCode == Activity.RESULT_CANCELED) {
-                Snackbar.make(binding.root, "Album Add Cancelled", Snackbar.LENGTH_LONG).show()
+            when (it.resultCode) {
+                Activity.RESULT_OK -> {
+                    lifecycleScope.launch {
+                        val updatedList = withContext(Dispatchers.IO) {
+                            app.albums.findAll()
+                        }
+                        (binding.recyclerView.adapter as AlbumAdapter)
+                            .updateList(updatedList)
+                    }
+                }
+                Activity.RESULT_CANCELED -> {
+                    Snackbar.make(binding.root, "Album Add Cancelled", Snackbar.LENGTH_LONG).show()
+                }
             }
         }
 
@@ -154,7 +170,7 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
 
     private fun filterByGenre() {
         val genres = resources.getStringArray(R.array.album_genres)
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.DialogTheme))
         builder.setTitle("Choose Genre")
         builder.setItems(genres) { _, which ->
             val selectedGenre = genres[which]

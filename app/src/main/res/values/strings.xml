@@ -85,4 +85,5 @@
     <string name="edit_album">Edit Album</string>
     <string name="euro_symbol">€%1$.2f</string>
     <string name="album_cover">Album Cover</string>
+    <string name="go_to_album_list">Go to Album List</string>
 </resources>

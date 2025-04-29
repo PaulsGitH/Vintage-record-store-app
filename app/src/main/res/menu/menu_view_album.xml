@@ -9,4 +9,12 @@
         app:showAsAction="always"
         android:background="@android:color/transparent"
         android:tint="@null"   />
+
+    <item
+        android:id="@+id/item_album_list"
+        android:icon="@drawable/ic_album"
+        android:title="@string/go_to_album_list"
+        app:showAsAction="always"
+        android:background="@android:color/transparent"
+        android:tint="@color/white" />
 </menu>

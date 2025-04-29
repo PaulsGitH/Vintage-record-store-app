@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import ie.setu.Album.R
-import ie.setu.Album.databinding.ActivityLoginBinding
+import ie.setu.album.R
+import ie.setu.album.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 

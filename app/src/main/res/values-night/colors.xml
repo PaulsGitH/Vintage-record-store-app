@@ -5,4 +5,6 @@
     <color name="md_theme_onBackground">#FFFFFF</color>
     <color name="md_theme_surface">#121212</color>
     <color name="md_theme_onSurface">#FFFFFF</color>
+    <color name="popup_bg">#212121</color>
+    <color name="popup_text">#FFFFFF</color>
 </resources>

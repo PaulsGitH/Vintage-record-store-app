@@ -4,13 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import ie.setu.Album.R
-import ie.setu.Album.adapters.AlbumAdapter
-import ie.setu.Album.adapters.AlbumListener
-import ie.setu.Album.databinding.ActivityFavoritesBinding
-import ie.setu.Album.main.MainApp
-import ie.setu.Album.models.AlbumModel
+import ie.setu.album.R
+import ie.setu.album.adapters.AlbumAdapter
+import ie.setu.album.adapters.AlbumListener
+import ie.setu.album.databinding.ActivityFavoritesBinding
+import ie.setu.album.main.MainApp
+import ie.setu.album.models.AlbumModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FavoritesActivity : AppCompatActivity(), AlbumListener {
 
@@ -48,20 +52,36 @@ class FavoritesActivity : AppCompatActivity(), AlbumListener {
     }
 
     private fun loadFavorites() {
-        val favoriteAlbums = app.albums.findFavorites()
+        // 1) launch a coroutine tied to this Activity’s lifecycle
+        lifecycleScope.launch {
+            // 2) do your blocking Firebase call off the main thread
+            val favouriteAlbums = withContext(Dispatchers.IO) {
+                app.albums.findFavorites()
+            }
 
-        if (favoriteAlbums.isEmpty()) {
-            binding.recyclerView.visibility = View.GONE
-            binding.noFavouritesMessage.visibility = View.VISIBLE
-        } else {
-            binding.recyclerView.visibility = View.VISIBLE
-            binding.noFavouritesMessage.visibility = View.GONE
-            binding.recyclerView.layoutManager = LinearLayoutManager(this)
-            binding.recyclerView.adapter = AlbumAdapter(favoriteAlbums, this)
+            // 3) back on Main, update the UI
+            if (favouriteAlbums.isEmpty()) {
+                binding.recyclerView.visibility       = View.GONE
+                binding.noFavouritesMessage.visibility = View.VISIBLE
+            } else {
+                binding.recyclerView.visibility       = View.VISIBLE
+                binding.noFavouritesMessage.visibility = View.GONE
+                binding.recyclerView.layoutManager     = LinearLayoutManager(this@FavoritesActivity)
+                binding.recyclerView.adapter           =
+                    AlbumAdapter(favouriteAlbums, this@FavoritesActivity)
+            }
         }
     }
 
     override fun onAlbumClick(album: AlbumModel) {
+        val viewIntent = Intent(this, ViewAlbumActivity::class.java)
+        viewIntent.putExtra("album_view", album)
+        startActivity(viewIntent)
+    }
+
+    override fun onResume() {
+        super.onResume()
         loadFavorites()
     }
 }
+

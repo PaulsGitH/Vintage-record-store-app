@@ -1,4 +1,4 @@
-package ie.setu.Album.models
+package ie.setu.album.models
 
 import timber.log.Timber.i
 
@@ -47,7 +47,7 @@ class AlbumMemStore : AlbumStore {
         albums.forEach { i("$it") }
     }
 
-    fun searchAll(query: String): List<AlbumModel> {
+    override fun searchAll(query: String): List<AlbumModel> {
         return albums.filter {
             it.albumName.contains(query, ignoreCase = true) ||
                     it.artist.contains(query, ignoreCase = true) ||
@@ -55,7 +55,7 @@ class AlbumMemStore : AlbumStore {
         }
     }
 
-    fun findFavorites(): List<AlbumModel> {
+    override fun findFavorites(): List<AlbumModel> {
         return albums.filter { it.isFavorite }
     }
 
