@@ -55,7 +55,9 @@ android {
         outputColorName.set("RED")
         ignoreFailures.set(false)
     }
-
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
 
 }
 
@@ -72,7 +74,7 @@ dependencies {
     implementation (libs.timberkt)
     implementation (libs.picasso)
     implementation(libs.firebase.firestore.ktx)
-    testImplementation(libs.junit)
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.room.runtime)

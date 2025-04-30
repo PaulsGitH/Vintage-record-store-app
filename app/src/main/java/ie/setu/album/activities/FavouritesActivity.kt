@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.appbar.MaterialToolbar
 import ie.setu.album.R
 import ie.setu.album.adapters.AlbumAdapter
 import ie.setu.album.adapters.AlbumListener
@@ -56,7 +57,7 @@ class FavoritesActivity : AppCompatActivity(), AlbumListener {
         loadFavorites()
 
         val typeface = ResourcesCompat.getFont(this, R.font.vintage)
-        val toolbarTitle = findViewById<Toolbar>(R.id.topAppBar)
+        val toolbarTitle = findViewById<MaterialToolbar>(R.id.topAppBar)
 
         for (i in 0 until toolbarTitle.childCount) {
             val view = toolbarTitle.getChildAt(i)

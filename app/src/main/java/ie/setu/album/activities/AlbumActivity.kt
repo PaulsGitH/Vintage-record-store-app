@@ -24,6 +24,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import ie.setu.album.R
@@ -212,6 +213,13 @@ class AlbumActivity : AppCompatActivity() {
                 binding.albumReleaseDate.setText(selectedDate)
             }, year, month, day)
 
+            datePicker.setOnShowListener {
+                datePicker.getButton(DatePickerDialog.BUTTON_POSITIVE)
+                    .setTextColor(ContextCompat.getColor(this, R.color.hot_pink))
+                datePicker.getButton(DatePickerDialog.BUTTON_NEGATIVE)
+                    .setTextColor(ContextCompat.getColor(this, R.color.hot_pink))
+            }
+
             datePicker.show()
         }
 
@@ -253,7 +261,7 @@ class AlbumActivity : AppCompatActivity() {
 
 
         val typeface = ResourcesCompat.getFont(this, R.font.vintage)
-        val toolbarTitle = findViewById<Toolbar>(R.id.topAppBar)
+        val toolbarTitle = findViewById<MaterialToolbar>(R.id.topAppBar)
 
         for (i in 0 until toolbarTitle.childCount) {
             val view = toolbarTitle.getChildAt(i)

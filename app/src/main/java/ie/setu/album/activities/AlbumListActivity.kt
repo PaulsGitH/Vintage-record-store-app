@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.snackbar.Snackbar
 import ie.setu.album.R
 import ie.setu.album.activities.AlbumActivity
@@ -69,7 +70,7 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
         }
 
         val typeface = ResourcesCompat.getFont(this, R.font.vintage)
-        val toolbarTitle = findViewById<Toolbar>(R.id.topAppBar)
+        val toolbarTitle = findViewById<MaterialToolbar>(R.id.topAppBar)
 
         for (i in 0 until toolbarTitle.childCount) {
             val view = toolbarTitle.getChildAt(i)
