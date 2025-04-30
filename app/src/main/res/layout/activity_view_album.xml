@@ -101,7 +101,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="8dp"
                     android:isIndicator="true"
-                    android:progressTint="?attr/colorPrimary"/>
+                    android:theme="@style/RatingBarTheme"/>
 
                 <TextView
                     android:id="@+id/trackListLabel"
@@ -130,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/visit_band_website"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@color/hot_pink"
                     android:textSize="16sp"
                     android:layout_marginTop="16dp"/>
 

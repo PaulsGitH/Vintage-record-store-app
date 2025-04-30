@@ -9,15 +9,19 @@ import android.os.Handler
 import android.os.Looper
 import android.text.InputType
 import android.util.Patterns
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toolbar
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
@@ -244,6 +248,19 @@ class AlbumActivity : AppCompatActivity() {
                     true
                 }
                 else -> false
+            }
+        }
+
+
+        val typeface = ResourcesCompat.getFont(this, R.font.vintage)
+        val toolbarTitle = findViewById<Toolbar>(R.id.topAppBar)
+
+        for (i in 0 until toolbarTitle.childCount) {
+            val view = toolbarTitle.getChildAt(i)
+            if (view is TextView && view.text == toolbarTitle.title) {
+                view.typeface = typeface
+                view.setTextColor(ContextCompat.getColor(this, R.color.hot_pink))
+                view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30f)
             }
         }
 

@@ -12,4 +12,19 @@
     <style name="TextAppearance.App.PopupMenuItem" parent="TextAppearance.AppCompat.Body1">
         <item name="android:textColor">@color/popup_text</item>
     </style>
+
+    <style name="RatingBarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorControlActivated">@color/hot_pink</item>
+        <item name="colorControlNormal">@color/hot_pink</item>
+    </style>
+
+    <style name="DialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:textColorPrimary">?attr/colorOnBackground</item>
+        <item name="android:background">?android:colorBackground</item>
+    </style>
+
+    <style name="Widget.App.Button" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">@color/md_theme_primary</item>
+        <item name="android:textColor">@color/md_theme_onPrimary</item>
+    </style>
 </resources>

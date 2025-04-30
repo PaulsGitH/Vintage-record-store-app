@@ -1,15 +1,17 @@
 <resources>
+    <color name="hot_pink">#FF69B4</color>
+    <color name="md_theme_primary">#1A1A1A</color> <!-- soft near-black -->
+    <color name="md_theme_onPrimaryContainer">#2A2A2A</color>
+    <color name="md_theme_secondary">#1F1F1F</color>
+    <color name="md_theme_onSecondaryContainer">#2F2F2F</color>
+    <color name="md_theme_onPrimaryFixedVariant">#2A2A2A</color>
     <color name="popup_bg">#F0F0F0</color>
     <color name="popup_text">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="md_theme_primary">#415F91</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>
     <color name="md_theme_primaryContainer">#D6E3FF</color>
-    <color name="md_theme_onPrimaryContainer">#284777</color>
-    <color name="md_theme_secondary">#405F90</color>
     <color name="md_theme_onSecondary">#FFFFFF</color>
     <color name="md_theme_secondaryContainer">#D6E3FF</color>
-    <color name="md_theme_onSecondaryContainer">#264777</color>
     <color name="md_theme_tertiary">#784F83</color>
     <color name="md_theme_onTertiary">#FFFFFF</color>
     <color name="md_theme_tertiaryContainer">#FAD7FF</color>
@@ -33,7 +35,6 @@
     <color name="md_theme_primaryFixed">#D6E3FF</color>
     <color name="md_theme_onPrimaryFixed">#001B3E</color>
     <color name="md_theme_primaryFixedDim">#AAC7FF</color>
-    <color name="md_theme_onPrimaryFixedVariant">#284777</color>
     <color name="md_theme_secondaryFixed">#D6E3FF</color>
     <color name="md_theme_onSecondaryFixed">#001B3D</color>
     <color name="md_theme_secondaryFixedDim">#A9C7FF</color>
