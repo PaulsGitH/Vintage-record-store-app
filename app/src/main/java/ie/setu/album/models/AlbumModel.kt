@@ -5,19 +5,24 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 /**
- * Represents an album in the Vintage Records app.
+ * Data class representing a music album in the Vintage Record Store app.
  *
- * @property albumId Unique identifier for the album.
- * @property albumName Name of the album.
- * @property albumImage URI reference to the album cover image.
- * @property albumReleaseDate Release date of the album.
- * @property albumGenre Genre of the album (selected from predefined genres).
- * @property artist Name of the artist or band.
- * @property rating User rating of the album (out of 5 stars).
- * @property cost Price of the album.
- * @property trackList A map of track names and their durations.
- * @property linkToAlbumWebsite External link to the album’s official website.
- * @property sampleSongYouTube YouTube link to a sample song from the album.
+ * Implements [Parcelable] to allow easy transfer of album data between activities.
+ *
+ * @property albumId Unique ID used for local and database reference.
+ * @property albumName Title of the album.
+ * @property albumDescription Brief written description or summary of the album.
+ * @property albumImage [Uri] pointing to the album’s cover art (local or remote).
+ * @property albumReleaseDate Release date of the album, in `dd/MM/yyyy` format.
+ * @property albumGenre Genre/category of the album (e.g., Rock, Jazz, Pop).
+ * @property artist Artist or band that produced the album.
+ * @property rating Integer value (1–5) representing user rating of the album.
+ * @property cost Price of the album in Euros (€).
+ * @property trackList Mutable map containing track titles and their order (e.g., "Track 1" to "Song Title").
+ * @property linkToAlbumWebsite URL string linking to the artist’s or album’s official website.
+ * @property sampleSongYouTube YouTube video link used to embed a sample song preview.
+ * @property isFavorite Boolean flag indicating if the album is marked as a user favorite.
+ * @property firebaseId Unique identifier used to sync this record with Firebase Firestore.
  */
 
 @Parcelize

@@ -1,5 +1,10 @@
 <resources>
-    <color name="md_theme_primary">#BB86FC</color>
+    <color name="hot_pink">#FF69B4</color>
+    <color name="md_theme_primary">#1A1A1A</color> <!-- soft near-black -->
+    <color name="md_theme_onPrimaryContainer">#2A2A2A</color>
+    <color name="md_theme_secondary">#1F1F1F</color>
+    <color name="md_theme_onSecondaryContainer">#2F2F2F</color>
+    <color name="md_theme_onPrimaryFixedVariant">#2A2A2A</color>
     <color name="md_theme_onPrimary">#000000</color>
     <color name="md_theme_background">#121212</color>
     <color name="md_theme_onBackground">#FFFFFF</color>

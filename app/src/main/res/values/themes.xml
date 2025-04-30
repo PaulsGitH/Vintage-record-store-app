@@ -1,21 +1,4 @@
 <resources>
-
-    <style name="DialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="android:textColorPrimary">?attr/colorOnBackground</item>
-        <item name="android:background">?android:colorBackground</item>
-    </style>
-
-    <style name="Widget.App.Button" parent="Widget.Material3.Button">
-        <item name="android:backgroundTint">@color/md_theme_primary</item>
-        <item name="android:textColor">@color/md_theme_onPrimary</item>
-    </style>
-
-    <style name="RatingBarTheme" parent="ThemeOverlay.AppCompat.Dark">
-        <item name="colorControlActivated">?attr/colorPrimary</item>
-        <item name="colorControlNormal">?attr/colorOnPrimary</item>
-    </style>
-
-
     <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:buttonStyle">@style/Widget.App.Button</item>
         <item name="colorPrimary">@color/md_theme_primary</item>
