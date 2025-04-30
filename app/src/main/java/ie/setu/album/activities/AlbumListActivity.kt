@@ -3,23 +3,22 @@ package ie.setu.album.activities
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.ContextThemeWrapper
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
-import androidx.appcompat.widget.SearchView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.snackbar.Snackbar
 import ie.setu.album.R
-import ie.setu.album.activities.AlbumActivity
 import ie.setu.album.adapters.AlbumAdapter
 import ie.setu.album.adapters.AlbumListener
 import ie.setu.album.databinding.ActivityAlbumListBinding
@@ -69,7 +68,7 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
         }
 
         val typeface = ResourcesCompat.getFont(this, R.font.vintage)
-        val toolbarTitle = findViewById<Toolbar>(R.id.topAppBar)
+        val toolbarTitle = findViewById<MaterialToolbar>(R.id.topAppBar)
 
         for (i in 0 until toolbarTitle.childCount) {
             val view = toolbarTitle.getChildAt(i)
@@ -79,9 +78,7 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
                 view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30f)
             }
         }
-
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -146,7 +143,6 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
                 filterByGenre()
                 return true
             }
-
         }
         return super.onOptionsItemSelected(item)
     }
@@ -200,5 +196,4 @@ class AlbumListActivity : AppCompatActivity(), AlbumListener {
         }
         builder.show()
     }
-
 }

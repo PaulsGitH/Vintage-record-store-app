@@ -12,7 +12,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.appbar.MaterialToolbar
@@ -39,7 +38,7 @@ class ViewAlbumActivity : AppCompatActivity() {
         showAlbum()
 
         val typeface = ResourcesCompat.getFont(this, R.font.vintage)
-        val toolbarTitle = findViewById<Toolbar>(R.id.topAppBar)
+        val toolbarTitle = findViewById<MaterialToolbar>(R.id.topAppBar)
 
         for (i in 0 until toolbarTitle.childCount) {
             val view = toolbarTitle.getChildAt(i)
@@ -80,7 +79,6 @@ class ViewAlbumActivity : AppCompatActivity() {
         albumRating.rating = album.rating.toFloat()
         trackListLabel.setTypeface(null, Typeface.BOLD)
 
-
         try {
             if (album.albumImage != Uri.EMPTY) {
                 contentResolver.openInputStream(album.albumImage)?.use {
@@ -97,18 +95,23 @@ class ViewAlbumActivity : AppCompatActivity() {
             albumCover.setImageResource(R.mipmap.ic_launcher)
         }
 
-
         visitBandWebsite.setOnClickListener {
             val url = album.linkToAlbumWebsite.trim()
             if (url.startsWith("http://") || url.startsWith("https://")) {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 startActivity(intent)
             } else {
-                Toast.makeText(this, getString(R.string.enter_valid_album_website), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.enter_valid_album_website),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
-        for ((key, value) in album.trackList.toSortedMap(compareBy { it.substringAfter("Track ").toIntOrNull() ?: 0 })) {
+        for ((key, value) in album.trackList.toSortedMap(
+            compareBy { it.substringAfter("Track ").toIntOrNull() ?: 0 }
+        )) {
             val trackTextView = TextView(this).apply {
                 text = "$key: $value"
                 textSize = 16f

@@ -39,10 +39,10 @@ class AlbumAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(album: AlbumModel, listener: AlbumListener) {
-            binding.AlbumTitle.text     = album.albumName
-            binding.ArtistName.text     = album.artist
-            binding.GenreName.text      = album.albumGenre
-            binding.AlbumPrice.text     = "€${"%.2f".format(album.cost)}"
+            binding.AlbumTitle.text = album.albumName
+            binding.ArtistName.text = album.artist
+            binding.GenreName.text = album.albumGenre
+            binding.AlbumPrice.text = "€${"%.2f".format(album.cost)}"
             binding.albumCardRating.rating = album.rating.toFloat()
             Picasso.get()
                 .load(album.albumImage)
@@ -52,15 +52,21 @@ class AlbumAdapter(
             binding.root.setOnClickListener { listener.onAlbumClick(album) }
 
             binding.favouriteIcon.setImageResource(
-                if (album.isFavorite) R.drawable.ic_favorite
-                else R.drawable.ic_favorite_border
+                if (album.isFavorite) {
+                    R.drawable.ic_favorite
+                } else {
+                    R.drawable.ic_favorite_border
+                }
             )
             binding.favouriteIcon.setOnClickListener {
                 val newState = !album.isFavorite
                 album.isFavorite = newState
                 binding.favouriteIcon.setImageResource(
-                    if (newState) R.drawable.ic_favorite
-                    else R.drawable.ic_favorite_border
+                    if (newState) {
+                        R.drawable.ic_favorite
+                    } else {
+                        R.drawable.ic_favorite_border
+                    }
                 )
                 (binding.root.context.applicationContext as MainApp)
                     .albums
@@ -69,4 +75,3 @@ class AlbumAdapter(
         }
     }
 }
-

@@ -9,7 +9,7 @@ fun showImagePicker(intentLauncher: ActivityResultLauncher<Intent>) {
         addCategory(Intent.CATEGORY_OPENABLE)
         type = "image/*"
         flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or
-                Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+            Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
     }
 
     val chooser = Intent.createChooser(pickIntent, R.string.select_album_image.toString()).apply {
@@ -17,5 +17,3 @@ fun showImagePicker(intentLauncher: ActivityResultLauncher<Intent>) {
     }
     intentLauncher.launch(chooser)
 }
-
-

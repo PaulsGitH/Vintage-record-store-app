@@ -50,14 +50,12 @@ class AlbumMemStore : AlbumStore {
     override fun searchAll(query: String): List<AlbumModel> {
         return albums.filter {
             it.albumName.contains(query, ignoreCase = true) ||
-                    it.artist.contains(query, ignoreCase = true) ||
-                    it.albumGenre.contains(query, ignoreCase = true)
+                it.artist.contains(query, ignoreCase = true) ||
+                it.albumGenre.contains(query, ignoreCase = true)
         }
     }
 
     override fun findFavorites(): List<AlbumModel> {
         return albums.filter { it.isFavorite }
     }
-
-
 }

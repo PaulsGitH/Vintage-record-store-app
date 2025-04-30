@@ -17,17 +17,11 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         val spinAnimation = AnimationUtils.loadAnimation(this, R.anim.spin)
         binding.vinylImage.startAnimation(spinAnimation)
-
 
         binding.enterStoreButton.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
-
-
-
     }
 }
-
