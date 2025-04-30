@@ -1,12 +1,14 @@
 package ie.setu.album.helpers
 
 import android.content.Context
-import timber.log.Timber.e
 import java.io.*
+import timber.log.Timber.e
 
 fun write(context: Context, fileName: String, data: String) {
     try {
-        val outputStreamWriter = OutputStreamWriter(context.openFileOutput(fileName, Context.MODE_PRIVATE))
+        val outputStreamWriter = OutputStreamWriter(
+            context.openFileOutput(fileName, Context.MODE_PRIVATE)
+        )
         outputStreamWriter.write(data)
         outputStreamWriter.close()
     } catch (e: Exception) {

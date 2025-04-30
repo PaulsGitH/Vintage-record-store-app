@@ -5,9 +5,9 @@ import android.net.Uri
 import com.google.gson.*
 import com.google.gson.reflect.TypeToken
 import ie.setu.album.helpers.*
-import timber.log.Timber
 import java.lang.reflect.Type
 import java.util.*
+import timber.log.Timber
 
 const val JSON_FILE = "albums.json"
 val gsonBuilder: Gson = GsonBuilder()
@@ -19,7 +19,6 @@ val listType: Type = object : TypeToken<ArrayList<AlbumModel>>() {}.type
 fun generateRandomId(): Long {
     return Random().nextLong()
 }
-
 
 class AlbumJSONStore(private val context: Context) : AlbumStore {
 
@@ -69,8 +68,8 @@ class AlbumJSONStore(private val context: Context) : AlbumStore {
     override fun searchAll(query: String): List<AlbumModel> {
         return albums.filter {
             it.albumName.contains(query, ignoreCase = true) ||
-                    it.artist.contains(query, ignoreCase = true) ||
-                    it.albumGenre.contains(query, ignoreCase = true)
+                it.artist.contains(query, ignoreCase = true) ||
+                it.albumGenre.contains(query, ignoreCase = true)
         }
     }
 

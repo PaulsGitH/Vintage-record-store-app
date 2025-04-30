@@ -27,8 +27,8 @@ class AlbumRoomStore(context: Context) : AlbumStore {
     override fun searchAll(query: String): List<AlbumModel> {
         return findAll().filter {
             it.albumName.contains(query, ignoreCase = true) ||
-                    it.artist.contains(query, ignoreCase = true) ||
-                    it.albumGenre.contains(query, ignoreCase = true)
+                it.artist.contains(query, ignoreCase = true) ||
+                it.albumGenre.contains(query, ignoreCase = true)
         }
     }
 

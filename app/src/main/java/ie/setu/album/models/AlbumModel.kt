@@ -26,18 +26,19 @@ import kotlinx.parcelize.Parcelize
  */
 
 @Parcelize
-data class AlbumModel(var albumId: Long = 0,
-                      var albumName: String = "",
-                      var albumDescription: String = "",
-                      var albumImage: Uri = Uri.EMPTY,
-                      var albumReleaseDate: String = "",
-                      var albumGenre: String = "",
-                      var artist: String = "",
-                      var rating: Int = 1,
-                      var cost: Double = 0.0,
-                      var trackList: MutableMap<String, String> = mutableMapOf(),
-                      var linkToAlbumWebsite: String = "",
-                      var sampleSongYouTube: String = "",
-                      var isFavorite: Boolean = false,
-                      var firebaseId: String = ""
+data class AlbumModel(
+    var albumId: Long = 0,
+    var albumName: String = "",
+    var albumDescription: String = "",
+    var albumImage: Uri = Uri.EMPTY,
+    var albumReleaseDate: String = "",
+    var albumGenre: String = "",
+    var artist: String = "",
+    var rating: Int = 1,
+    var cost: Double = 0.0,
+    var trackList: MutableMap<String, String> = mutableMapOf(),
+    var linkToAlbumWebsite: String = "",
+    var sampleSongYouTube: String = "",
+    var isFavorite: Boolean = false,
+    var firebaseId: String = ""
 ) : Parcelable

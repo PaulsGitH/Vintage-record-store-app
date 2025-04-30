@@ -20,7 +20,11 @@ class AlbumMemStoreTest {
     fun setup() {
         pinkFloyd = AlbumModel(albumName = "The Wall", artist = "Pink Floyd", albumGenre = "Rock")
         beatles = AlbumModel(albumName = "Abbey Road", artist = "The Beatles", albumGenre = "Pop")
-        queen = AlbumModel(albumName = "A Night at the Opera", artist = "Queen", albumGenre = "Rock")
+        queen = AlbumModel(
+            albumName = "A Night at the Opera",
+            artist = "Queen",
+            albumGenre = "Rock"
+        )
         bowie = AlbumModel(albumName = "Heroes", artist = "David Bowie", albumGenre = "Alternative")
         adele = AlbumModel(albumName = "25", artist = "Adele", albumGenre = "Soul")
 
@@ -49,7 +53,11 @@ class AlbumMemStoreTest {
     inner class AddAlbums {
         @Test
         fun `adding an album to a populated list adds to ArrayList`() {
-            val newAlbum = AlbumModel(albumName = "Random Access Memories", artist = "Daft Punk", albumGenre = "Electronic")
+            val newAlbum = AlbumModel(
+                albumName = "Random Access Memories",
+                artist = "Daft Punk",
+                albumGenre = "Electronic"
+            )
             assertEquals(5, populatedAlbums!!.findAll().size)
             populatedAlbums!!.create(newAlbum)
             assertEquals(6, populatedAlbums!!.findAll().size)
@@ -58,7 +66,11 @@ class AlbumMemStoreTest {
 
         @Test
         fun `adding an album to an empty list adds to ArrayList`() {
-            val newAlbum = AlbumModel(albumName = "1989", artist = "Taylor Swift", albumGenre = "Pop")
+            val newAlbum = AlbumModel(
+                albumName = "1989",
+                artist = "Taylor Swift",
+                albumGenre = "Pop"
+            )
             assertEquals(0, emptyAlbums!!.findAll().size)
             emptyAlbums!!.create(newAlbum)
             assertEquals(1, emptyAlbums!!.findAll().size)

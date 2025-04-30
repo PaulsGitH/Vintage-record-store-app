@@ -6,7 +6,6 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
@@ -67,7 +66,6 @@ class FavoritesActivity : AppCompatActivity(), AlbumListener {
                 view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30f)
             }
         }
-
     }
 
     private fun loadFavorites() {
@@ -80,13 +78,13 @@ class FavoritesActivity : AppCompatActivity(), AlbumListener {
 
             // 3) back on Main, update the UI
             if (favouriteAlbums.isEmpty()) {
-                binding.recyclerView.visibility       = View.GONE
+                binding.recyclerView.visibility = View.GONE
                 binding.noFavouritesMessage.visibility = View.VISIBLE
             } else {
-                binding.recyclerView.visibility       = View.VISIBLE
+                binding.recyclerView.visibility = View.VISIBLE
                 binding.noFavouritesMessage.visibility = View.GONE
-                binding.recyclerView.layoutManager     = LinearLayoutManager(this@FavoritesActivity)
-                binding.recyclerView.adapter           =
+                binding.recyclerView.layoutManager = LinearLayoutManager(this@FavoritesActivity)
+                binding.recyclerView.adapter =
                     AlbumAdapter(favouriteAlbums, this@FavoritesActivity)
             }
         }
@@ -103,4 +101,3 @@ class FavoritesActivity : AppCompatActivity(), AlbumListener {
         loadFavorites()
     }
 }
-

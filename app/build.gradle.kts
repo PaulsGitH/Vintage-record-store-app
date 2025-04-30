@@ -58,21 +58,20 @@ android {
     tasks.withType<Test> {
         useJUnitPlatform()
     }
-
 }
 
 dependencies {
 
-    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
     implementation(libs.youtube.player)
-    implementation (libs.gson)
+    implementation(libs.gson)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation (libs.timberkt)
-    implementation (libs.picasso)
+    implementation(libs.timberkt)
+    implementation(libs.picasso)
     implementation(libs.firebase.firestore.ktx)
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
     androidTestImplementation(libs.androidx.junit)
@@ -85,5 +84,4 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
     implementation("com.google.firebase:firebase-analytics")
-
 }
