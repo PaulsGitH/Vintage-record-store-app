@@ -5,19 +5,21 @@ import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.tasks.await
 
 class FirebaseAlbumStore : AlbumStore {
     private val db = Firebase.firestore
     private val col = db.collection("albums")
 
-    override fun findAll(): List<AlbumModel> {
-        val snapshot = Tasks.await(col.get())
-        return snapshot.documents.map { it.toModel() }
+    override fun findAll(): List<AlbumModel> = runBlocking {
+        val snapshot = col.get().await()
+        snapshot.documents.map { it.toModel() }
     }
 
     override fun create(album: AlbumModel) {
         val docId = album.firebaseId.ifEmpty { col.document().id }
-        album.firebaseId = docId // remember it for next time
+        album.firebaseId = docId
         col.document(docId).set(album.toMap())
     }
 
@@ -32,8 +34,8 @@ class FirebaseAlbumStore : AlbumStore {
     override fun searchAll(query: String): List<AlbumModel> =
         findAll().filter {
             it.albumName.contains(query, true) ||
-                it.artist.contains(query, true) ||
-                it.albumGenre.contains(query, true)
+                    it.artist.contains(query, true) ||
+                    it.albumGenre.contains(query, true)
         }
 
     override fun findFavorites(): List<AlbumModel> =
