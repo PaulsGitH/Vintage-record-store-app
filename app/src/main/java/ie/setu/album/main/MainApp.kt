@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.FirebaseApp
 import ie.setu.album.models.AlbumRoomStore
 import ie.setu.album.models.AlbumStore
+import ie.setu.album.models.AlbumJSONStore
 import ie.setu.album.models.AlbumMemStore
 import ie.setu.album.models.FirebaseAlbumStore
 import timber.log.Timber
