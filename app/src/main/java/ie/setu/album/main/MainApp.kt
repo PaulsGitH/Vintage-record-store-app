@@ -19,6 +19,9 @@ class MainApp : Application() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
         i("Album started")
+        if (FirebaseApp.getApps(this).isEmpty()) {
+            FirebaseApp.initializeApp(this)
+        }
         // albums = AlbumMemStore()
         // albums = AlbumJSONStore(applicationContext)
         // albums = AlbumRoomStore(applicationContext)
