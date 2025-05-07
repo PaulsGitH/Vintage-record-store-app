@@ -159,109 +159,37 @@ class AlbumActivity : AppCompatActivity() {
                     album.albumDescription.isNotEmpty() && album.albumDescription.length <= 750 &&
                     album.albumGenre != "Select Genre" && album.albumReleaseDate.isNotEmpty() &&
                     album.cost > 0 && album.albumImage != Uri.EMPTY && album.trackList.isNotEmpty() &&
-                    album.sampleSongYouTube.isNotEmpty() && (
-                        album.sampleSongYouTube.contains(
-                                "youtube.com"
-                            ) ||
-                            album.sampleSongYouTube.contains("youtu.be")
-                        ) && Patterns.WEB_URL.matcher(
-                            album.linkToAlbumWebsite
-                        ).matches() &&
-                    (edit || existingAlbum == null)
-                ) {
+                    album.sampleSongYouTube.isNotEmpty() && (album.sampleSongYouTube.contains("youtube.com") ||
+                    album.sampleSongYouTube.contains("youtu.be")) && Patterns.WEB_URL.matcher(album.linkToAlbumWebsite).matches() &&
+                    (edit || existingAlbum == null)) {
                     if (edit) {
                         app.albums.update(album.copy())
-                        Snackbar.make(
-                            binding.root,
-                            getString(R.string.album_updated_success),
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            setResult(RESULT_OK)
-                            finish()
-                        }, 500)
+                        Snackbar.make(binding.root, getString(R.string.album_updated_success), Snackbar.LENGTH_SHORT).show()
                     } else {
                         app.albums.create(album.copy())
-                        Snackbar.make(
-                            binding.root,
-                            getString(R.string.album_added_success),
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            setResult(RESULT_OK)
-                            finish()
-                        }, 500)
+                        Snackbar.make(binding.root, getString(R.string.album_added_success), Snackbar.LENGTH_SHORT).show()
                     }
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        setResult(RESULT_OK)
+                        finish()
+                    }, 500)
                 } else {
                     when {
-                        album.albumName.isEmpty() -> Snackbar.make(
-                            it,
-                            getString(R.string.enter_album_title),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                        existingAlbum != null -> Snackbar.make(
-                            it,
-                            getString(R.string.album_duplicate_title),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                        album.artist.isEmpty() -> Snackbar.make(
-                            it,
-                            getString(R.string.hint_albumArtist),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                        album.albumDescription.isEmpty() -> Snackbar.make(
-                            it,
-                            getString(R.string.enter_album_description),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                        album.albumDescription.length > 750 -> Snackbar.make(
-                            it,
-                            getString(R.string.album_description_too_long),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                        album.albumGenre == "Select Genre" -> Snackbar.make(
-                            it,
-                            getString(R.string.hint_albumGenre),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                        album.albumReleaseDate.isEmpty() -> Snackbar.make(
-                            it,
-                            getString(R.string.hint_albumReleaseDate),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                        album.cost <= 0 -> Snackbar.make(
-                            it,
-                            getString(R.string.hint_albumCost),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                        album.albumImage == Uri.EMPTY -> Snackbar.make(
-                            it,
-                            getString(R.string.enter_album_image),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                        album.trackList.isEmpty() -> Snackbar.make(
-                            it,
-                            getString(R.string.enter_at_least_one_track),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                        album.sampleSongYouTube.isEmpty() -> Snackbar.make(
-                            it,
-                            getString(R.string.enter_album_youtube),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                        !album.sampleSongYouTube.contains("youtube.com") && !album.sampleSongYouTube.contains(
-                            "youtu.be"
-                        ) ->
-                            Snackbar.make(
-                                it,
-                                getString(R.string.youtube_link_only),
-                                Snackbar.LENGTH_LONG
-                            ).show()!Patterns.WEB_URL.matcher(album.linkToAlbumWebsite).matches() ->
-                            Snackbar.make(
-                                it,
-                                getString(R.string.enter_valid_album_website),
-                                Snackbar.LENGTH_LONG
-                            ).show()
+                        album.albumName.isEmpty() -> Snackbar.make(it, getString(R.string.enter_album_title), Snackbar.LENGTH_LONG).show()
+                        existingAlbum != null -> Snackbar.make(it, getString(R.string.album_duplicate_title), Snackbar.LENGTH_LONG).show()
+                        album.artist.isEmpty() -> Snackbar.make(it, getString(R.string.hint_albumArtist), Snackbar.LENGTH_LONG).show()
+                        album.albumDescription.isEmpty() -> Snackbar.make(it, getString(R.string.enter_album_description), Snackbar.LENGTH_LONG).show()
+                        album.albumDescription.length > 750 -> Snackbar.make(it, getString(R.string.album_description_too_long), Snackbar.LENGTH_LONG).show()
+                        album.albumGenre == "Select Genre" -> Snackbar.make(it, getString(R.string.hint_albumGenre), Snackbar.LENGTH_LONG).show()
+                        album.albumReleaseDate.isEmpty() -> Snackbar.make(it, getString(R.string.hint_albumReleaseDate), Snackbar.LENGTH_LONG).show()
+                        album.cost <= 0 -> Snackbar.make(it, getString(R.string.hint_albumCost), Snackbar.LENGTH_LONG).show()
+                        album.albumImage == Uri.EMPTY -> Snackbar.make(it, getString(R.string.enter_album_image), Snackbar.LENGTH_LONG).show()
+                        album.trackList.isEmpty() -> Snackbar.make(it, getString(R.string.enter_at_least_one_track), Snackbar.LENGTH_LONG).show()
+                        album.sampleSongYouTube.isEmpty() -> Snackbar.make(it, getString(R.string.enter_album_youtube), Snackbar.LENGTH_LONG).show()
+                        !album.sampleSongYouTube.contains("youtube.com") && !album.sampleSongYouTube.contains("youtu.be") ->
+                            Snackbar.make(it, getString(R.string.youtube_link_only), Snackbar.LENGTH_LONG).show()
+                        !Patterns.WEB_URL.matcher(album.linkToAlbumWebsite).matches() ->
+                            Snackbar.make(it, getString(R.string.enter_valid_album_website), Snackbar.LENGTH_LONG).show()
                     }
                 }
             }
