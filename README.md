@@ -95,3 +95,8 @@ _A modern Android app for managing vintage music albums, redesigned with Materia
 
 ## 🗂 Wireframe
 ![IMG_0414](https://github.com/user-attachments/assets/c7c9b192-9248-40c7-9dfc-f0a80207f894)
+
+---
+
+[![Watch the video](https://img.youtube.com/vi/F2xqWGbkhjs/maxresdefault.jpg)](https://youtu.be/F2xqWGbkhjs)
+
