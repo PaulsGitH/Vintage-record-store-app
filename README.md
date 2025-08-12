@@ -98,5 +98,5 @@ _A modern Android app for managing vintage music albums, redesigned with Materia
 
 ---
 
-[![Watch the video](https://img.youtube.com/vi/F2xqWGbkhjs/maxresdefault.jpg)](https://youtu.be/F2xqWGbkhjs)
+[![Watch the video](https://img.youtube.com/vi/F2xqWGbkhjs/maxresdefault.jpg)](https://www.youtube.com/watch?v=gDC4oeotj6I)
 
