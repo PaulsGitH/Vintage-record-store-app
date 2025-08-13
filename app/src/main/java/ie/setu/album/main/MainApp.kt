@@ -23,9 +23,9 @@ class MainApp : Application() {
             FirebaseApp.initializeApp(this)
         }
         // albums = AlbumMemStore()
-        // albums = AlbumJSONStore(applicationContext)
+         albums = AlbumJSONStore(applicationContext)
         // albums = AlbumRoomStore(applicationContext)
-         albums = FirebaseAlbumStore()
+        // albums = FirebaseAlbumStore()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         FirebaseApp.initializeApp(this)
     }
